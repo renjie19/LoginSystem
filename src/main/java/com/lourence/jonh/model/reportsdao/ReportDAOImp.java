@@ -35,7 +35,7 @@ public class ReportDAOImp implements ReportDAO {
             }else{
                 report.setTimeOut(null);
             }
-            reportList.add(report);
+            reportList.add(report);//jhgjhgjhgjhgjhgjhgjhgjhg
         }
         return reportList;
     }
