@@ -1,7 +1,7 @@
 package com.lourence.jonh.controller;
 
 import com.lourence.jonh.model.reportsdao.Report;
-import com.lourence.jonh.model.reportsdao.ReportDAOImp;
+import com.lourence.jonh.model.reportsdao.ReportDaoImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +23,7 @@ public class ReportController {
         try {
             double totalWorkingHours = 0;
             double hoursRendered;
-            List<Report> reportList = ReportDAOImp.getInstance().getReportsEachDate(employeeId, startDate, endDate);
+            List<Report> reportList = ReportDaoImpl.getInstance().getReportsBetweenDates(employeeId, startDate, endDate);
             if(reportList != null) {
                 for (Report report : reportList) {
                     hoursRendered = getHoursRendered(report);

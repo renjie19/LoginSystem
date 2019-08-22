@@ -7,15 +7,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportDAOImp implements ReportDAO {
-    private static ReportDAOImp reportDAOImp;
+public class ReportDaoImpl implements ReportDao {
+    private static ReportDaoImpl reportDaoImpl;
 
-    private ReportDAOImp(){}
-    public static ReportDAOImp getInstance(){
-        if(reportDAOImp==null){
-            reportDAOImp = new ReportDAOImp();
+    private ReportDaoImpl(){}
+    public static ReportDaoImpl getInstance(){
+        if(reportDaoImpl ==null){
+            reportDaoImpl = new ReportDaoImpl();
         }
-        return reportDAOImp;
+        return reportDaoImpl;
     }
 
     private List<Report> generateReport(ResultSet resultSet)throws Exception{
@@ -41,7 +41,7 @@ public class ReportDAOImp implements ReportDAO {
     }
 
     @Override
-    public List<Report> getReportsEachDate(int employeeId, String startDate, String endDate) throws Exception{
+    public List<Report> getReportsBetweenDates(int employeeId, String startDate, String endDate) throws Exception{
         List<Report> reportList1 = new ArrayList<Report>();
         String insertSql = "select * from timelogs where id = ? && date between ? AND ? order by date,time";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);

@@ -12,6 +12,7 @@ public class TimeLog {
     public int getId(){
         return EmployeeId;
     }
+
     public void setId(int id){
         this.EmployeeId = id;
     }
@@ -27,6 +28,7 @@ public class TimeLog {
     public void setDate(Date date){
         this.date  = date;
     }
+
     public Date getDate(){
         return this.date;
     }
@@ -34,6 +36,7 @@ public class TimeLog {
     public void setTime(Date time){
         this.time = time;
     }
+
     public Date getTime(){
         return this.time;
     }

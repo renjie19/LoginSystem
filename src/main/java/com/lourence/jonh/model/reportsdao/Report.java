@@ -11,6 +11,7 @@ public class Report {
     public int getId(){
         return this.id;
     }
+
     public void setId(int employeeId){
         this.id = employeeId;
     }
@@ -18,6 +19,7 @@ public class Report {
     public Date getDate(){
         return this.date;
     }
+
     public void setDate(Date date){
         this.date = date;
     }
@@ -25,6 +27,7 @@ public class Report {
     public void setTimeIn(Date timeIn){
         this.timeIn = timeIn;
     }
+
     public Date getTimeIn(){
         return this.timeIn;
     }
@@ -32,6 +35,7 @@ public class Report {
     public Date getTimeOut(){
         return this.timeOut;
     }
+
     public void setTimeOut(Date timeOut){
         this.timeOut = timeOut;
     }
