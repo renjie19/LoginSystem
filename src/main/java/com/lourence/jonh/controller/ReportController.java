@@ -28,10 +28,10 @@ public class ReportController {
                 for (Report report : reportList) {
                     hoursRendered = getHoursRendered(report);
                     System.out.println(report.getId() + " | " + report.getDate() + " | " + report.getTimeIn() + " | " +
-                            report.getTimeOut()+ " | " + String.format("% .1f", hoursRendered));
+                            report.getTimeOut() + " | " + String.format("% .1f", hoursRendered));
                     totalWorkingHours = totalWorkingHours + hoursRendered;
                 }
-                System.out.println("Total Hours: "+String.format("% .1f",totalWorkingHours));
+                System.out.println("Total Hours: " + String.format("% .1f",totalWorkingHours));
             }
         }catch(Exception e){
             e.printStackTrace();

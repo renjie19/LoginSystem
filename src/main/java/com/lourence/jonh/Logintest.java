@@ -17,7 +17,9 @@ public class Logintest {
         employee.setAge(30);
         employee.setAddress("Mindanao");
         employee.setPosition("Head Chief");
-        employeeController.addEmployee(employee);
+        //employeeController.addEmployee(employee);
+
+        employeeController.getEmployeeById(90);
 
 
 

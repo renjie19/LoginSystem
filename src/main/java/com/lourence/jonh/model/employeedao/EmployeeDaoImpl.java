@@ -7,18 +7,18 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDaoImp implements EmployeeDAO{
-    private static EmployeeDaoImp employeeDAOImp;
+public class EmployeeDaoImpl implements EmployeeDao {
+    private static EmployeeDaoImpl employeeDaoImpl;
     private ResultSet resultSet;
     private Employee employee;
 
-    private EmployeeDaoImp(){}
+    private EmployeeDaoImpl(){}
     
-    public static EmployeeDaoImp getInstance(){
-        if(employeeDAOImp==null){
-            employeeDAOImp = new EmployeeDaoImp();
+    public static EmployeeDaoImpl getInstance(){
+        if(employeeDaoImpl ==null){
+            employeeDaoImpl = new EmployeeDaoImpl();
         }
-        return employeeDAOImp;
+        return employeeDaoImpl;
     }
 
     @Override
@@ -60,20 +60,11 @@ public class EmployeeDaoImp implements EmployeeDAO{
     }
 
     @Override
-    public Employee getEmployeeByID(int employeeId)throws Exception{
+    public Employee getEmployeeById(int employeeId)throws Exception{
         String insertSql = "SELECT * FROM employee WHERE id = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,employeeId);
-        try {
-            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
-            if (resultSet.next()) {
-                employee = generateEmployee(resultSet);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySqlConnector.getInstance().closeConnection();
-        }
+        employee = getQueryResultAsEmployeeObject(preparedStatement);
         return employee;
     }
 
@@ -82,22 +73,12 @@ public class EmployeeDaoImp implements EmployeeDAO{
         String insertSql = "SELECT * FROM employee WHERE name = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setString(1,name);
-        employee = new Employee();
-        try {
-            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
-            if (resultSet.next()) {
-                employee = generateEmployee(resultSet);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySqlConnector.getInstance().closeConnection();
-        }
+        employee = getQueryResultAsEmployeeObject(preparedStatement);
         return employee;
     }
 
     @Override
-    public void updateEmployee(Employee employee) throws Exception{
+    public void updateEmployee(Employee employee)throws Exception{
         String insertSql = "UPDATE employee SET name = ?, age = ?, address = ?,position = ? WHERE id = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setString(1,employee.getName());
@@ -115,6 +96,21 @@ public class EmployeeDaoImp implements EmployeeDAO{
         employee.setAge(resultSet.getInt("age"));
         employee.setAddress(resultSet.getString("address"));
         employee.setPosition(resultSet.getString("position"));
+        return employee;
+    }
+
+    private Employee getQueryResultAsEmployeeObject(PreparedStatement preparedStatement){
+        try {
+            employee = new Employee();
+            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
+            if (resultSet.next()) {
+                employee = generateEmployee(resultSet);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            MySqlConnector.getInstance().closeConnection();
+        }
         return employee;
     }
 }
