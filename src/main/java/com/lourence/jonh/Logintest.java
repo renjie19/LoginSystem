@@ -3,7 +3,7 @@ package com.lourence.jonh;
 import com.lourence.jonh.controller.EmployeeController;
 import com.lourence.jonh.controller.ReportController;
 import com.lourence.jonh.controller.TimeLogController;
-import com.lourence.jonh.model.timelogdao.TimeLog;
+import com.lourence.jonh.model.employeedao.Employee;
 
 
 public class Logintest {
@@ -12,16 +12,13 @@ public class Logintest {
         TimeLogController timelogController = TimeLogController.getInstance();
         ReportController reportController = ReportController.getInstance();
 
+        Employee employee = new Employee();
+        employee.setName("General Bato");
+        employee.setAge(30);
+        employee.setAddress("Mindanao");
+        employee.setPosition("Head Chief");
+        employeeController.addEmployee(employee);
 
-        TimeLog timelog = new TimeLog();
-        timelog.setId(9);
-        //timelogController.log(timelog);
-        String startDate ="2019-08-19";
-        String endDate = "2019-08-21";
-
-        for(int x = 0;x<10;x++) {
-            reportController.viewEmployeeReportPerDate(x, startDate, endDate);
-        }
 
 
 

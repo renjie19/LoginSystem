@@ -27,8 +27,9 @@ public class EmployeeController {
         try {
             checkIfEmployeeNameExist(employee.getName());
             int rowsAffected = EmployeeDaoImp.getInstance().addEmployee(employee);
+            employee = EmployeeDaoImp.getInstance().getEmployeeByName(employee.getName());
             if(rowsAffected != 0){
-                System.out.println("Successful");
+                System.out.println("Added Successfully\nEmployee Id: "+employee.getEmployeeId());
             }
         }catch(Exception e){
             System.out.println(e.getMessage());
