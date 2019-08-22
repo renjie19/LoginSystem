@@ -4,16 +4,16 @@ import com.lourence.jonh.util.StateEnum;
 import java.util.Date;
 
 public class TimeLog {
-    private int EmployeeID;
+    private int EmployeeId;
     private StateEnum type;
     private Date date;
     private Date time;
     
     public int getId(){
-        return EmployeeID;
+        return EmployeeId;
     }
     public void setId(int id){
-        this.EmployeeID = id;
+        this.EmployeeId = id;
     }
     
     public void setType(StateEnum type) {

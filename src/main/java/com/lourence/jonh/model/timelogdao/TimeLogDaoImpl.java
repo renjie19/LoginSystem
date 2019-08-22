@@ -5,18 +5,18 @@ import com.lourence.jonh.util.StateEnum;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class TimeLogDAOImp implements TimeLogDAO{
-    private static TimeLogDAOImp timeLogDAO;
+public class TimeLogDaoImpl implements TimeLogDao {
+    private static TimeLogDaoImpl timeLogDao;
     private ResultSet resultSet;
     private TimeLog timeLog;
     
-    private TimeLogDAOImp(){}
+    private TimeLogDaoImpl(){}
 
-    public static TimeLogDAOImp getInstance(){
-        if(timeLogDAO==null){
-            timeLogDAO = new TimeLogDAOImp();
+    public static TimeLogDaoImpl getInstance(){
+        if(timeLogDao ==null){
+            timeLogDao = new TimeLogDaoImpl();
         }
-        return timeLogDAO;
+        return timeLogDao;
     }
     
     @Override
@@ -50,7 +50,7 @@ public class TimeLogDAOImp implements TimeLogDAO{
     }
 
     @Override
-    public boolean checkIfEmployeeIdExist(int employeeId)throws Exception{
+    public boolean hasEmployeeId(int employeeId)throws Exception{
         String insertSql = "SELECT * FROM employee WHERE id = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,employeeId);
