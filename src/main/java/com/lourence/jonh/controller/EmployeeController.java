@@ -84,8 +84,12 @@ public class EmployeeController {
         return new Employee();
     }
 
-    private boolean hasId(int id)throws Exception{
-        return employeeDao.getEmployeeById(id).getEmployeeId() == id;
+    public boolean hasId(int id)throws Exception{
+        if(employeeDao.getEmployeeById(id).getEmployeeId() == id){
+            return true;
+        }else{
+            throw new Exception("Id Does Not Exist");
+        }
     }
 
     private void hasEmployeeName(String employeeName) throws Exception{

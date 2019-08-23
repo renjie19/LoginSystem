@@ -20,18 +20,18 @@ public class TimeLogController {
         return timeLogController;
     }
     
-    public TimeLog log(TimeLog log){
+    public TimeLog log(int employeeId){
         try {
-            if(checkIfIdExists(log.getId())) {
-                log.setType(getEmployeeState(log.getId()));
-                int rowAffected = timeLogDao.addLog(log);
-                if(rowAffected != 0 && log.getType().equals(StateEnum.IN)){
-                    System.out.println("Login Successful");
-                }else if(rowAffected != 0 && log.getType().equals(StateEnum.OUT)){
-                    System.out.println("Logout Success");
-                }
+            TimeLog timelog = new TimeLog();
+            timelog.setId(employeeId);
+            timelog.setType(getEmployeeState(timelog.getId()));
+            int rowAffected = timeLogDao.addLog(timelog);
+            if(rowAffected != 0 && timelog.getType().equals(StateEnum.IN)){
+                System.out.println("Login Successful");
+            }else if(rowAffected != 0 && timelog.getType().equals(StateEnum.OUT)){
+                System.out.println("Logout Success");
             }
-            return log = timeLogDao.getLastLogById(log.getId());
+            return timelog = timeLogDao.getLastLogById(timelog.getId());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -53,13 +53,6 @@ public class TimeLogController {
            e.printStackTrace();
         }
         return StateEnum.IN;
-    }
-
-    private boolean checkIfIdExists(int employeeId)throws Exception{
-        if(!timeLogDao.hasEmployeeId(employeeId)){
-            throw new Exception("ID does not exist");
-        }
-        return true;
     }
 
       

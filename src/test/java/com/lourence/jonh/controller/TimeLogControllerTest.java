@@ -22,12 +22,10 @@ class TimeLogControllerTest {
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
         Employee employee1 = EmployeeController.getInstance().addEmployee(employee);
-        TimeLog timeLog = new TimeLog();
-        timeLog.setId(employee1.getEmployeeId());
-        TimeLog timeLog1 = TimeLogController.getInstance().log(timeLog);
-        assertEquals(timeLog1.getId(),timeLog.getId());
-        assertEquals(timeLog1.getType(), StateEnum.IN);
 
-
+        TimeLog timeLogIn = TimeLogController.getInstance().log(employee1.getEmployeeId());
+        assertEquals(timeLogIn.getType(), StateEnum.IN);
+        TimeLog timeLogOut = TimeLogController.getInstance().log(employee1.getEmployeeId());
+        assertEquals(timeLogOut.getType(),StateEnum.OUT);
     }
 }

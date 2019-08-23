@@ -18,7 +18,5 @@ public class Logintest {
         employee.setAddress("Mindanao");
         employee.setPosition("Head Chief");
         //employeeController.addEmployee(employee);
-
-
     }
 }
