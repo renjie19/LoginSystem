@@ -6,18 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class TimeLogDaoImpl implements TimeLogDao {
-    private static TimeLogDaoImpl timeLogDao;
     private ResultSet resultSet;
     private TimeLog timeLog;
-    
-    private TimeLogDaoImpl(){}
-
-    public static TimeLogDaoImpl getInstance(){
-        if(timeLogDao ==null){
-            timeLogDao = new TimeLogDaoImpl();
-        }
-        return timeLogDao;
-    }
     
     @Override
     public int addLog(TimeLog log)throws Exception{
@@ -65,6 +55,17 @@ public class TimeLogDaoImpl implements TimeLogDao {
             MySqlConnector.getInstance().closeConnection();
         }
         return false;
+    }
+
+    @Override
+    public void deleteAllLogs(){
+        try {
+            String insertSql = "DELETE FROM timelogs";
+            PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
+            MySqlConnector.getInstance().executeUpdate(preparedStatement);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private TimeLog generateTimeLog(ResultSet resultSet)throws Exception{

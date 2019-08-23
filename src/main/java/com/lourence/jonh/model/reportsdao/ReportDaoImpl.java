@@ -8,15 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportDaoImpl implements ReportDao {
-    private static ReportDaoImpl reportDaoImpl;
-
-    private ReportDaoImpl(){}
-    public static ReportDaoImpl getInstance(){
-        if(reportDaoImpl ==null){
-            reportDaoImpl = new ReportDaoImpl();
-        }
-        return reportDaoImpl;
-    }
 
     private List<Report> generateReport(ResultSet resultSet)throws Exception{
         List<Report> reportList = new ArrayList<Report>();
@@ -41,7 +32,7 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public List<Report> getReportsBetweenDates(int employeeId, String startDate, String endDate) throws Exception{
+    public List<Report> getReportsBetweenDatesById(int employeeId, String startDate, String endDate) throws Exception{
         List<Report> reportList1 = new ArrayList<Report>();
         String insertSql = "select * from timelogs where id = ? && date between ? AND ? order by date,time";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);

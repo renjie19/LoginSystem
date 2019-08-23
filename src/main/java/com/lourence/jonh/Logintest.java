@@ -19,11 +19,6 @@ public class Logintest {
         employee.setPosition("Head Chief");
         //employeeController.addEmployee(employee);
 
-        employeeController.getEmployeeById(90);
-
-
-
-
 
     }
 }
