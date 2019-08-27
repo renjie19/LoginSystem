@@ -92,8 +92,8 @@ public class EmployeeController {
         }
     }
 
-    private void hasEmployeeName(String employeeName) throws Exception{
-        employee = employeeDao.getEmployeeByName(employeeName);
+    private void hasEmployeeName(String employeeName) throws Exception {
+        Employee employee = employeeDao.getEmployeeByName(employeeName);
         if ((employee.getName() != null) && (employee.getName().equals(employeeName))) {
             throw new Exception("Employee Already Exist");
         }

@@ -33,6 +33,15 @@ public class MySqlConnector {
         return resultSet;
     }
 
+    public void execute(PreparedStatement preparedStatement){
+        try {
+           preparedStatement.execute();
+        } catch (SQLException e) {
+            closeConnection();
+            e.printStackTrace();
+        }
+    }
+
     public int executeUpdate(PreparedStatement preparedStatement){
         int rowsAffected = 0;
         try{
@@ -45,9 +54,11 @@ public class MySqlConnector {
         return rowsAffected;
     }
 
+
+
     public PreparedStatement prepareStatement(String sql)throws Exception{
         this.con = DriverManager.getConnection(URL, USER, PASSWORD);
-        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        PreparedStatement preparedStatement = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         return preparedStatement;
     }
 

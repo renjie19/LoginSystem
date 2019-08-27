@@ -11,6 +11,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
     private ResultSet resultSet;
     private Employee employee;
 
+
+    @Override
+    public Employee createEmployee(Employee employee) throws Exception {
+        String insertSql = "INSERT INTO employee(name,age,address,position)VALUES(?,?,?,?)";
+        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
+        preparedStatement.setString(1,employee.getName());
+        preparedStatement.setInt(2,employee.getAge());
+        preparedStatement.setString(3,employee.getAddress());
+        preparedStatement.setString(4,employee.getPosition());
+        MySqlConnector.getInstance().execute(preparedStatement);
+        ResultSet resultSet = preparedStatement.getGeneratedKeys();
+        resultSet.next();
+        employee = getEmployeeById(resultSet.getInt(1));
+        MySqlConnector.getInstance().closeConnection();
+        return employee;
+    }
+
     @Override
     public int addEmployee(Employee employee)throws Exception {
         String insertSql = "INSERT INTO employee(name,age,address,position)VALUES(?,?,?,?)";
