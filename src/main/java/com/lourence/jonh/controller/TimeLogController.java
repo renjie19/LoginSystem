@@ -7,7 +7,7 @@ import com.lourence.jonh.util.StateEnum;
 
 public class TimeLogController {
     private static TimeLogController timeLogController;
-    private TimeLogDao timeLogDao = new TimeLogDaoImpl(); ;
+    private TimeLogDao timeLogDao = new TimeLogDaoImpl();
     
     private TimeLogController(){
 
@@ -21,21 +21,21 @@ public class TimeLogController {
     }
     
     public TimeLog log(int employeeId){
+        TimeLog timeLog = new TimeLog();
         try {
-            TimeLog timelog = new TimeLog();
-            timelog.setId(employeeId);
-            timelog.setType(getEmployeeState(timelog.getId()));
-            int rowAffected = timeLogDao.addLog(timelog);
-            if(rowAffected != 0 && timelog.getType().equals(StateEnum.IN)){
+            timeLog.setId(employeeId);
+            timeLog.setType(getEmployeeState(timeLog.getId()));
+            int rowAffected = timeLogDao.addLog(timeLog);
+            if(rowAffected != 0 && timeLog.getType().equals(StateEnum.IN)){
                 System.out.println("Login Successful");
-            }else if(rowAffected != 0 && timelog.getType().equals(StateEnum.OUT)){
+            }else if(rowAffected != 0 && timeLog.getType().equals(StateEnum.OUT)){
                 System.out.println("Logout Success");
             }
-            return timelog = timeLogDao.getLastLogById(timelog.getId());
+            timeLog = timeLogDao.getLastLogById(timeLog.getId());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return timeLog;
     }
 
     public void deleteAllLogs(){
