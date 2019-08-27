@@ -22,7 +22,6 @@ class TimeLogControllerTest {
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
         Employee employee1 = EmployeeController.getInstance().addEmployee(employee);
-
         TimeLog timeLogIn = TimeLogController.getInstance().log(employee1.getEmployeeId());
         assertEquals(timeLogIn.getType(), StateEnum.IN);
         TimeLog timeLogOut = TimeLogController.getInstance().log(employee1.getEmployeeId());

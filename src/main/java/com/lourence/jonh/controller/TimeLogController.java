@@ -7,10 +7,10 @@ import com.lourence.jonh.util.StateEnum;
 
 public class TimeLogController {
     private static TimeLogController timeLogController;
-    private TimeLogDao timeLogDao = new TimeLogDaoImpl();
+    private TimeLogDao timeLogDao;
     
     private TimeLogController(){
-
+        timeLogDao = new TimeLogDaoImpl();
     }
     
     public static TimeLogController getInstance(){
@@ -31,7 +31,6 @@ public class TimeLogController {
             }else if(rowAffected != 0 && timeLog.getType().equals(StateEnum.OUT)){
                 System.out.println("Logout Success");
             }
-            timeLog = timeLogDao.getLastLogById(timeLog.getId());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
