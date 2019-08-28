@@ -1,8 +1,8 @@
-package com.lourence.jonh.controller;
+package com.lourence.jonh.report.controller;
 
-import com.lourence.jonh.model.reportsdao.Report;
-import com.lourence.jonh.model.reportsdao.ReportDao;
-import com.lourence.jonh.model.reportsdao.ReportDaoImpl;
+import com.lourence.jonh.report.dao.Report;
+import com.lourence.jonh.report.dao.ReportDao;
+import com.lourence.jonh.report.dao.ReportDaoImpl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,14 +24,13 @@ public class ReportController {
     public void viewEmployeeReportPerDate(int employeeId, String startDate, String endDate){
         try {
             double totalWorkingHours = 0;
-            double hoursRendered;
             List<Report> reportList = reportDao.getReportsBetweenDatesById(employeeId, startDate, endDate);
             if(reportList != null) {
                 for (Report report : reportList) {
-                    hoursRendered = getHoursRendered(report);
+                    report.setTotalHours(getHoursRendered(report));
                     System.out.println(report.getId() + " | " + report.getDate() + " | " + report.getTimeIn() + " | " +
-                            report.getTimeOut() + " | " + String.format("% .1f", hoursRendered));
-                    totalWorkingHours = totalWorkingHours + hoursRendered;
+                            report.getTimeOut() + " | " + String.format("% .1f", report.getTotalHours()));
+                    totalWorkingHours = totalWorkingHours + report.getTotalHours();
                 }
                 System.out.println("Total Hours: " + String.format("% .1f",totalWorkingHours));
             }

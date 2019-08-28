@@ -1,4 +1,4 @@
-package com.lourence.jonh.model.employeedao;
+package com.lourence.jonh.employee.dao;
 
 import com.lourence.jonh.util.MySqlConnector;
 

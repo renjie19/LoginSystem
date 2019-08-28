@@ -1,5 +1,5 @@
 
-package com.lourence.jonh.model.employeedao;
+package com.lourence.jonh.employee.dao;
 
 import java.util.List;
 

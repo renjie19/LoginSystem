@@ -1,4 +1,4 @@
-package com.lourence.jonh.model.timelogdao;
+package com.lourence.jonh.timelog.dao;
 
 public interface TimeLogDao {
     int addLog(TimeLog log)throws Exception;

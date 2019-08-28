@@ -1,7 +1,8 @@
-package com.lourence.jonh.controller;
+package com.lourence.jonh.timelog.controller;
 
-import com.lourence.jonh.model.employeedao.Employee;
-import com.lourence.jonh.model.timelogdao.TimeLog;
+import com.lourence.jonh.employee.controller.EmployeeController;
+import com.lourence.jonh.employee.dao.Employee;
+import com.lourence.jonh.timelog.dao.TimeLog;
 import com.lourence.jonh.util.StateEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

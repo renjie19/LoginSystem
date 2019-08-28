@@ -1,6 +1,6 @@
-package com.lourence.jonh.controller;
+package com.lourence.jonh.employee.controller;
 
-import com.lourence.jonh.model.employeedao.Employee;
+import com.lourence.jonh.employee.dao.Employee;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

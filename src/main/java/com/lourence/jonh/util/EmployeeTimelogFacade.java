@@ -1,8 +1,8 @@
 package com.lourence.jonh.util;
 
-import com.lourence.jonh.controller.EmployeeController;
-import com.lourence.jonh.controller.TimeLogController;
-import com.lourence.jonh.model.timelogdao.TimeLog;
+import com.lourence.jonh.employee.controller.EmployeeController;
+import com.lourence.jonh.timelog.controller.TimeLogController;
+import com.lourence.jonh.timelog.dao.TimeLog;
 
 public class EmployeeTimelogFacade {
 

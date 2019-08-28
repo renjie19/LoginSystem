@@ -1,8 +1,8 @@
-package com.lourence.jonh.controller;
+package com.lourence.jonh.timelog.controller;
 
-import com.lourence.jonh.model.timelogdao.TimeLog;
-import com.lourence.jonh.model.timelogdao.TimeLogDao;
-import com.lourence.jonh.model.timelogdao.TimeLogDaoImpl;
+import com.lourence.jonh.timelog.dao.TimeLog;
+import com.lourence.jonh.timelog.dao.TimeLogDao;
+import com.lourence.jonh.timelog.dao.TimeLogDaoImpl;
 import com.lourence.jonh.util.StateEnum;
 
 public class TimeLogController {

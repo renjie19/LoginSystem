@@ -1,4 +1,4 @@
-package com.lourence.jonh.model.employeedao;
+package com.lourence.jonh.employee.dao;
 
 public class Employee {
     private int employeeID;

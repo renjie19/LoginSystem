@@ -1,9 +1,8 @@
-package com.lourence.jonh.controller;
+package com.lourence.jonh.employee.controller;
 
-import com.lourence.jonh.model.employeedao.Employee;
-import com.lourence.jonh.model.employeedao.EmployeeDao;
-import com.lourence.jonh.model.employeedao.EmployeeDaoImpl;
-import com.lourence.jonh.view.EmployeeView;
+import com.lourence.jonh.employee.dao.Employee;
+import com.lourence.jonh.employee.dao.EmployeeDao;
+import com.lourence.jonh.employee.dao.EmployeeDaoImpl;
 
 import java.util.List;
 
@@ -58,9 +57,9 @@ public class EmployeeController {
     public int viewEmployees(){
         try {
             List<Employee> employeeList = employeeDao.getAllEmployees();
-            EmployeeView employeeView = new EmployeeView();
             for(Employee employee: employeeList){
-                employeeView.printEmployees(employee.getName(),employee.getAge(),employee.getAddress(),employee.getPosition());
+                System.out.println("[ "+employee.getName()+" | "+employee.getAge()+" | "+employee.getAddress()+"" +
+                        " | "+employee.getPosition()+" | "+" ]");
             }
             return employeeList.size();
         }catch(Exception e){

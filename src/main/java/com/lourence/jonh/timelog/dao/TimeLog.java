@@ -1,4 +1,4 @@
-package com.lourence.jonh.model.timelogdao;
+package com.lourence.jonh.timelog.dao;
 import com.lourence.jonh.util.StateEnum;
 
 import java.util.Date;

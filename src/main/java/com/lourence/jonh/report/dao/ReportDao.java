@@ -1,4 +1,4 @@
-package com.lourence.jonh.model.reportsdao;
+package com.lourence.jonh.report.dao;
 
 import java.util.List;
 

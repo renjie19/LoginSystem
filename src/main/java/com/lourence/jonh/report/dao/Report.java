@@ -1,4 +1,4 @@
-package com.lourence.jonh.model.reportsdao;
+package com.lourence.jonh.report.dao;
 
 import java.util.Date;
 
@@ -7,6 +7,7 @@ public class Report {
     private Date date;
     private Date timeIn;
     private Date timeOut;
+    private double totalHours;
 
     public int getId(){
         return this.id;
@@ -38,5 +39,13 @@ public class Report {
 
     public void setTimeOut(Date timeOut){
         this.timeOut = timeOut;
+    }
+
+    public void setTotalHours(double totalHours){
+        this.totalHours = totalHours;
+    }
+
+    public double getTotalHours(){
+        return this.totalHours;
     }
 }

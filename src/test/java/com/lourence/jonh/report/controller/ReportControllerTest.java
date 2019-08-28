@@ -1,6 +1,8 @@
-package com.lourence.jonh.controller;
+package com.lourence.jonh.report.controller;
 
-import com.lourence.jonh.model.employeedao.Employee;
+import com.lourence.jonh.employee.controller.EmployeeController;
+import com.lourence.jonh.employee.dao.Employee;
+import com.lourence.jonh.timelog.controller.TimeLogController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +26,7 @@ class ReportControllerTest {
         TimeLogController.getInstance().log(employeeResult.getEmployeeId());
 
         String startDate = "2019-08-19";
-        String endDate = "2019-08-23";
+        String endDate = "2019-08-28";
         int employeeId = employeeResult.getEmployeeId();
         ReportController.getInstance().viewEmployeeReportPerDate(employeeId,startDate,endDate);
     }
