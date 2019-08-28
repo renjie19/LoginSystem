@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class TimeLogDaoImpl implements TimeLogDao {
-    private ResultSet resultSet;
-    private TimeLog timeLog;
     
     @Override
     public int addLog(TimeLog log)throws Exception{
@@ -23,9 +21,9 @@ public class TimeLogDaoImpl implements TimeLogDao {
         String insertSql = "SELECT * FROM timelogs WHERE id = ? ORDER BY date DESC,time DESC LIMIT 1";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,id);
+        TimeLog timeLog = new TimeLog();
         try {
-            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
-            timeLog = new TimeLog();
+            ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
             if (resultSet.next()) {
                 timeLog = generateTimeLog(resultSet);
             } else {
@@ -51,7 +49,7 @@ public class TimeLogDaoImpl implements TimeLogDao {
     }
 
     private TimeLog generateTimeLog(ResultSet resultSet)throws Exception{
-        timeLog = new TimeLog();
+        TimeLog timeLog = new TimeLog();
         timeLog.setId(resultSet.getInt("id"));
         timeLog.setDate(resultSet.getDate("date"));
         timeLog.setTime(resultSet.getTime("time"));
