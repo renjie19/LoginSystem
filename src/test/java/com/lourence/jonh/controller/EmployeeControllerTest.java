@@ -22,7 +22,9 @@ class EmployeeControllerTest {
         employee.setAge(45);
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
+
         Employee savedEmployee = EmployeeController.getInstance().addEmployee(employee);
+        System.out.println(savedEmployee.getEmployeeId());
         assertEquals(employee.getName(), savedEmployee.getName());
         assertEquals(employee.getAge (), savedEmployee.getAge());
         assertEquals(employee.getAddress(), savedEmployee.getAddress());

@@ -8,25 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-    private ResultSet resultSet;
-    private Employee employee;
-
-
-    @Override
-    public Employee createEmployee(Employee employee) throws Exception {
-        String insertSql = "INSERT INTO employee(name,age,address,position)VALUES(?,?,?,?)";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setString(1,employee.getName());
-        preparedStatement.setInt(2,employee.getAge());
-        preparedStatement.setString(3,employee.getAddress());
-        preparedStatement.setString(4,employee.getPosition());
-        MySqlConnector.getInstance().execute(preparedStatement);
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        resultSet.next();
-        employee = getEmployeeById(resultSet.getInt(1));
-        MySqlConnector.getInstance().closeConnection();
-        return employee;
-    }
 
     @Override
     public int addEmployee(Employee employee)throws Exception {
@@ -36,7 +17,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
         preparedStatement.setInt(2,employee.getAge());
         preparedStatement.setString(3,employee.getAddress());
         preparedStatement.setString(4,employee.getPosition());
-        return MySqlConnector.getInstance().executeUpdate(preparedStatement);
+        MySqlConnector.getInstance().execute(preparedStatement);
+        ResultSet resultSet = preparedStatement.getGeneratedKeys();
+        resultSet.next();
+        return resultSet.getInt(1);
     }
 
     @Override
@@ -53,9 +37,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         String insertSql = "SELECT * FROM employee";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         try {
-            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
+            ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
             while (resultSet.next()) {
-                employee = generateEmployee(resultSet);
+                 Employee employee = generateEmployee(resultSet);
                 employeeList.add(employee);
             }
         }catch(Exception e){
@@ -68,11 +52,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeById(int employeeId)throws Exception{
+        Employee employee = new Employee();
         String insertSql = "SELECT * FROM employee WHERE id = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,employeeId);
         try {
-            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
+            ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
             if (resultSet.next()) {
                 employee = generateEmployee(resultSet);
             }else{
@@ -91,9 +76,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
         String insertSql = "SELECT * FROM employee WHERE name = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setString(1,name);
-        employee = new Employee();
+        Employee employee = new Employee();
         try {
-            resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
+            ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
             if (resultSet.next()) {
                 employee = generateEmployee(resultSet);
             }
@@ -129,7 +114,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     private Employee generateEmployee(ResultSet resultSet)throws Exception{
-        employee = new Employee();
+        Employee employee = new Employee();
         employee.setEmployeeId(resultSet.getInt("id"));
         employee.setName(resultSet.getString("name"));
         employee.setAge(resultSet.getInt("age"));

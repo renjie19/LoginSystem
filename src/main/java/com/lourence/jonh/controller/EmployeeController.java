@@ -25,16 +25,14 @@ public class EmployeeController {
     public Employee addEmployee(Employee employee){
         try {
             hasEmployeeName(employee.getName());
-            int rowsAffected = employeeDao.addEmployee(employee);
-            employee = employeeDao.getEmployeeByName(employee.getName());
-            if(rowsAffected != 0){
+            employee.setEmployeeId(employeeDao.addEmployee(employee));
+            if(employee.getEmployeeId() != 0){
                 System.out.println("Added Successfully\nEmployee Id: "+employee.getEmployeeId());
             }
-            return employee;
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-        return null;
+        return employee;
     }
 
     public void deleteEmployee(Employee employee){
