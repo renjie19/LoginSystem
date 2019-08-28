@@ -40,24 +40,6 @@ public class TimeLogDaoImpl implements TimeLogDao {
     }
 
     @Override
-    public boolean hasEmployeeId(int employeeId)throws Exception{
-        String insertSql = "SELECT * FROM employee WHERE id = ?";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1,employeeId);
-        try {
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                return true;
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally {
-            MySqlConnector.getInstance().closeConnection();
-        }
-        return false;
-    }
-
-    @Override
     public void deleteAllLogs(){
         try {
             String insertSql = "DELETE FROM timelogs";
