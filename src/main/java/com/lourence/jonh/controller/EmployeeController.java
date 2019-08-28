@@ -8,8 +8,6 @@ import com.lourence.jonh.view.EmployeeView;
 import java.util.List;
 
 public class EmployeeController {
-    
-    private Employee employee;
     private static EmployeeController employeeController;
     private EmployeeDao employeeDao = new EmployeeDaoImpl();
 
