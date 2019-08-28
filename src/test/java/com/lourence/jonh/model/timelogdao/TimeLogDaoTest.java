@@ -3,6 +3,7 @@ package com.lourence.jonh.model.timelogdao;
 import com.lourence.jonh.model.employeedao.Employee;
 import com.lourence.jonh.model.employeedao.EmployeeDao;
 import com.lourence.jonh.model.employeedao.EmployeeDaoImpl;
+import com.lourence.jonh.util.StateEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,7 +34,7 @@ class TimeLogDaoTest {
             TimeLog timeLog = new TimeLog();
             timeLog.setId(employee.getEmployeeId());
             TimeLog lastLog = timeLogDao.getLastLogById(timeLog.getId());
-            timeLog.setType(lastLog.getType());
+            timeLog.setType((lastLog.getType().equals(StateEnum.OUT))?StateEnum.IN:StateEnum.OUT);
             timeLogDao.addLog(timeLog);
             lastLog = timeLogDao.getLastLogById(timeLog.getId());
             assertEquals(timeLog.getId(),lastLog.getId());
