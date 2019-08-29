@@ -46,6 +46,15 @@ public class LicenseDaoImpl implements LicenseDao {
         preparedStatement.setString(2,license.getExpiryDate().toString());
         MySqlConnector.getInstance().executeUpdate(preparedStatement);
     }
+
+    @Override
+    public void deleteLicenseByEmployeeId(int employeeId) throws Exception {
+        String insertSql = "DELETE FROM employeeLicense WHERE employeeId = ?";
+        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
+        preparedStatement.setInt(1, employeeId);
+        MySqlConnector.getInstance().executeUpdate(preparedStatement);
+    }
+
     private License generateLicense(ResultSet resultSet) throws  Exception {
         License license = new License();
         license.setLicenseNumber(resultSet.getInt("licenseNumber"));

@@ -5,4 +5,5 @@ public interface LicenseDao {
     License getLicenseDetails(int employeeId) throws Exception;
     void deleteAllLicense() throws Exception;
     void updateLicense(License license) throws Exception;
+    void deleteLicenseByEmployeeId(int employeeId) throws Exception;
 }
