@@ -1,0 +1,8 @@
+package com.lourence.jonh.teachinglicense.repository;
+
+public interface LicenseDao {
+    void addLicenseDetails(License teachingLicense) throws Exception;
+    License getLicenseDetails(int employeeId) throws Exception;
+    void deleteAllLicense() throws Exception;
+    void updateLicense(License license) throws Exception;
+}
