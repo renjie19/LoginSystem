@@ -12,10 +12,11 @@ public class LicenseService {
         licenseDao = new LicenseDaoImpl();
     }
 
-    public static void getInstance() {
+    public static LicenseService getInstance() {
         if(licenseService==null){
             licenseService = new LicenseService();
         }
+        return licenseService;
     }
 
     public void addLicenseDetails(License license) {
