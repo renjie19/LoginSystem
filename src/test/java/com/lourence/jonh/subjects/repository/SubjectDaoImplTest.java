@@ -1,17 +1,17 @@
 package com.lourence.jonh.subjects.repository;
 
-import com.lourence.jonh.section.service.SectionService;
+import com.lourence.jonh.employee.repository.Employee;
+import com.lourence.jonh.employee.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 class SubjectDaoImplTest {
     @BeforeEach
     void before() {
         try {
-            SubjectDao subjectDao = new SubjectDaoImpl();
-            //subjectDao.deleteAll();
-            SectionService.getInstance().deleteAll();
-            //EmployeeService.getInstance().deleteAllEmployee();
+            EmployeeService.getInstance().deleteAllEmployee();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -20,7 +20,7 @@ class SubjectDaoImplTest {
 
     @Test
     void assignSubject() {
-        /**Employee employee = new Employee();
+        Employee employee = new Employee();
         try{
             employee.setName("Gloria Arroyo");
             employee.setAge(45);
@@ -29,11 +29,12 @@ class SubjectDaoImplTest {
             employee = EmployeeService.getInstance().addEmployee(employee);
         }catch (Exception e){
             e.printStackTrace();
-        }**/
+        }
+
         Subject subject = new Subject();
         subject.setSubjectCode(102);
         subject.setSubject("Science");
-        subject.setEmployeeId(70);
+        subject.setEmployeeId(employee.getEmployeeId());
         try{
             SubjectDao subjectDao = new SubjectDaoImpl();
             subjectDao.assignSubject(subject);
@@ -52,5 +53,34 @@ class SubjectDaoImplTest {
 
     @Test
     void getEmployeeSubjects() {
+        try{
+            Employee employee = new Employee();
+            employee.setName("Gloria Arroyo");
+            employee.setAge(45);
+            employee.setAddress("Manila");
+            employee.setPosition("Cha-Cha Queen");
+            employee = EmployeeService.getInstance().addEmployee(employee);
+
+            Subject subject = new Subject();
+            subject.setSubjectCode(101);
+            subject.setSubject("Math");
+            subject.setEmployeeId(employee.getEmployeeId());
+            Subject subject1 = new Subject();
+            subject1.setSubjectCode(102);
+            subject1.setSubject("Science");
+            subject1.setEmployeeId(employee.getEmployeeId());
+
+            SubjectDao subjectDao = new SubjectDaoImpl();
+            subjectDao.assignSubject(subject);
+            subjectDao.assignSubject(subject1);
+
+            List<Subject> subjectList = subjectDao.getSubjectsByEmployeeId(employee.getEmployeeId());
+            System.out.println(subjectList.get(1).getEmployeeName());
+            for (Subject subject2 : subjectList) {
+                System.out.println("[ "+subject2.getSubjectCode()+" | "+subject2.getSubject()+" ]");
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

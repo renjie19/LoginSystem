@@ -45,10 +45,12 @@ public class SubjectDaoImpl implements SubjectDao {
     }
 
     @Override
-    public List<Subject> getEmployeeSubjects(int employeeId) throws Exception {
+    public List<Subject> getSubjectsByEmployeeId(int employeeId) throws Exception {
         List<Subject> subjectList = new ArrayList<Subject>();
-        String insertSql = "SELECT * FROM subjects WHERE employeeId = ?";
+        String insertSql = "SELECT name,subjectId,subjectName FROM subjects  join employee on " +
+                "employee.id = subjects.employeeId WHERE employeeId = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
+        preparedStatement.setInt(1, employeeId);
         ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
         while(resultSet.next()) {
             subjectList.add(generateSubject(resultSet));
@@ -56,11 +58,23 @@ public class SubjectDaoImpl implements SubjectDao {
         return subjectList;
     }
 
+    @Override
+    public List<Subject> getAllSubjects() throws Exception {
+        List<Subject> subjectList = new ArrayList<Subject>();
+        String insertSql = "SELECT subjectId, subjectName FROM subjects GROUP BY subjectId";
+        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
+        ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
+        while(resultSet.next()) {
+            subjectList.add(generateSubject(resultSet));
+        }
+        return subjectList; //returns subjectId and SubjectName only
+    }
+
     private Subject generateSubject(ResultSet resultSet) throws Exception {
         Subject subject = new Subject();
         subject.setSubjectCode(resultSet.getInt("subjectId"));
         subject.setSubject(resultSet.getString("subjectName"));
-        subject.setEmployeeId(resultSet.getInt("employeeId"));
+        subject.setEmployeeName(resultSet.getString("name"));
         return subject;
     }
 }

@@ -7,5 +7,6 @@ public interface SubjectDao {
     void deleteSubjectAssignment(int subjectCode) throws Exception;
     void deleteAll() throws Exception;
     void updateSubjectAssignment(Subject subject) throws Exception;
-    List<Subject> getEmployeeSubjects(int employeeId) throws Exception;
+    List<Subject> getSubjectsByEmployeeId(int employeeId) throws Exception;
+    List<Subject> getAllSubjects() throws Exception;
 }

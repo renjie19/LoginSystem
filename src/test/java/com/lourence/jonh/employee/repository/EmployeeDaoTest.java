@@ -18,7 +18,7 @@ class EmployeeDaoTest {
     }
 
     @Test
-    Employee addEmployee() {
+    void addEmployee() {
         Employee employee = new Employee();
         employee.setName("Gloria Arroyo");
         employee.setAge(45);
@@ -35,19 +35,28 @@ class EmployeeDaoTest {
         assertEquals(employee.getAge(), savedEmployee.getAge());
         assertEquals(employee.getAddress(),savedEmployee.getAddress());
         assertEquals(employee.getPosition(),savedEmployee.getPosition());
-        return savedEmployee;
     }
 
     @Test
     void deleteEmployee() {
         EmployeeDao employeeDao = new EmployeeDaoImpl();
         List<Employee> employeeList = new ArrayList<Employee>();
-        Employee sampleEmployee = addEmployee();
+        Employee employee = new Employee();
+        employee.setName("Gloria Arroyo");
+        employee.setAge(45);
+        employee.setAddress("Manila");
+        employee.setPosition("Cha-Cha Queen");
+        Employee savedEmployee = new Employee();
+        try {
+            savedEmployee = employeeDao.getEmployeeById(employeeDao.addEmployee(employee));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         try {
             employeeList = employeeDao.getAllEmployees();
             assertEquals(employeeList.size(),1);
 
-            employeeDao.deleteEmployee(sampleEmployee);
+            employeeDao.deleteEmployee(savedEmployee);
             employeeList = employeeDao.getAllEmployees();
             assertEquals(0,employeeList.size());
         }catch(Exception e){
@@ -58,20 +67,30 @@ class EmployeeDaoTest {
     @Test
     void updateEmployee() {
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        Employee employee = addEmployee();
-        employee.setName("Rodrigo Roa Duterte");
-        Employee updatedEmployee = new Employee();
+        Employee employee = new Employee();
+        employee.setName("Gloria Arroyo");
+        employee.setAge(45);
+        employee.setAddress("Manila");
+        employee.setPosition("Cha-Cha Queen");
+        Employee savedEmployee = new Employee();
         try {
-            employeeDao.updateEmployee(employee);
-            employee = employeeDao.getEmployeeById(employee.getEmployeeId());
-            updatedEmployee = employeeDao.getEmployeeById(employee.getEmployeeId());
+            savedEmployee = employeeDao.getEmployeeById(employeeDao.addEmployee(employee));
         }catch(Exception e){
             e.printStackTrace();
         }
-        assertEquals(employee.getEmployeeId(),updatedEmployee.getEmployeeId());
-        assertEquals(employee.getName(),updatedEmployee.getName());
-        assertEquals(employee.getAge(),updatedEmployee.getAge());
-        assertEquals(employee.getAddress(),updatedEmployee.getAddress());
-        assertEquals(employee.getPosition(),updatedEmployee.getPosition());
+        savedEmployee.setName("Rodrigo Roa Duterte");
+        Employee updatedEmployee = new Employee();
+        try {
+            employeeDao.updateEmployee(savedEmployee);
+            savedEmployee = employeeDao.getEmployeeById(employee.getEmployeeId());
+            updatedEmployee = employeeDao.getEmployeeById(savedEmployee.getEmployeeId());
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        assertEquals(savedEmployee.getEmployeeId(),updatedEmployee.getEmployeeId());
+        assertEquals(savedEmployee.getName(),updatedEmployee.getName());
+        assertEquals(savedEmployee.getAge(),updatedEmployee.getAge());
+        assertEquals(savedEmployee.getAddress(),updatedEmployee.getAddress());
+        assertEquals(savedEmployee.getPosition(),updatedEmployee.getPosition());
     }
 }

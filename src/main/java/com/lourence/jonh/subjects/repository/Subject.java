@@ -4,6 +4,7 @@ public class Subject {
     private int  subjectCode;
     private String subject;
     private int employeeId;
+    private String employeeName;
 
     public void setSubjectCode(int subjectCode) {
         this.subjectCode = subjectCode;
@@ -27,5 +28,13 @@ public class Subject {
 
     public int getEmployeeId() {
         return employeeId;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getEmployeeName() {
+        return employeeName;
     }
 }
