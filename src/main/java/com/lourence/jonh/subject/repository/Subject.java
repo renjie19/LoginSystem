@@ -1,4 +1,4 @@
-package com.lourence.jonh.subjects.repository;
+package com.lourence.jonh.subject.repository;
 
 public class Subject {
     private int  subjectCode;

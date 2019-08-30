@@ -1,4 +1,4 @@
-package com.lourence.jonh.subjects.repository;
+package com.lourence.jonh.subject.repository;
 
 import com.lourence.jonh.util.MySqlConnector;
 

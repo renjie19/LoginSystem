@@ -1,4 +1,4 @@
-package com.lourence.jonh.teachinglicense.repository;
+package com.lourence.jonh.license.repository;
 
 import com.lourence.jonh.util.MySqlConnector;
 

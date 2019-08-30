@@ -2,7 +2,7 @@ package com.lourence.jonh.util;
 
 import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.employee.service.EmployeeService;
-import com.lourence.jonh.teachinglicense.service.LicenseService;
+import com.lourence.jonh.license.service.LicenseService;
 import com.lourence.jonh.timelog.repository.TimeLog;
 import com.lourence.jonh.timelog.service.TimeLogService;
 import org.junit.jupiter.api.BeforeEach;

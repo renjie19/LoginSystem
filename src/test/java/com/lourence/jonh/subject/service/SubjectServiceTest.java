@@ -1,8 +1,8 @@
-package com.lourence.jonh.subjects.service;
+package com.lourence.jonh.subject.service;
 
 import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.employee.service.EmployeeService;
-import com.lourence.jonh.subjects.repository.Subject;
+import com.lourence.jonh.subject.repository.Subject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

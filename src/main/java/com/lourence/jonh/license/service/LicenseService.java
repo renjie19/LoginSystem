@@ -1,8 +1,8 @@
-package com.lourence.jonh.teachinglicense.service;
+package com.lourence.jonh.license.service;
 
-import com.lourence.jonh.teachinglicense.repository.License;
-import com.lourence.jonh.teachinglicense.repository.LicenseDao;
-import com.lourence.jonh.teachinglicense.repository.LicenseDaoImpl;
+import com.lourence.jonh.license.repository.License;
+import com.lourence.jonh.license.repository.LicenseDao;
+import com.lourence.jonh.license.repository.LicenseDaoImpl;
 
 public class LicenseService {
     private static LicenseService licenseService;

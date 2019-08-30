@@ -1,4 +1,4 @@
-package com.lourence.jonh.teachinglicense.repository;
+package com.lourence.jonh.license.repository;
 
 public interface LicenseDao {
     void addLicenseDetails(License teachingLicense) throws Exception;

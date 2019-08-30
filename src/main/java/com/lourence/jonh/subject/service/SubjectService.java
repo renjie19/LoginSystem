@@ -1,8 +1,8 @@
-package com.lourence.jonh.subjects.service;
+package com.lourence.jonh.subject.service;
 
-import com.lourence.jonh.subjects.repository.Subject;
-import com.lourence.jonh.subjects.repository.SubjectDao;
-import com.lourence.jonh.subjects.repository.SubjectDaoImpl;
+import com.lourence.jonh.subject.repository.Subject;
+import com.lourence.jonh.subject.repository.SubjectDao;
+import com.lourence.jonh.subject.repository.SubjectDaoImpl;
 
 import java.util.List;
 

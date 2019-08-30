@@ -1,4 +1,4 @@
-package com.lourence.jonh.subjects.repository;
+package com.lourence.jonh.subject.repository;
 
 import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.employee.service.EmployeeService;
