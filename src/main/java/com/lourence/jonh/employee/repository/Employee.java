@@ -1,6 +1,7 @@
 package com.lourence.jonh.employee.repository;
 
 import com.lourence.jonh.license.repository.License;
+import com.lourence.jonh.section.repository.Section;
 import com.lourence.jonh.subject.repository.Subject;
 
 import java.util.List;
@@ -13,9 +14,18 @@ public class Employee {
     private String position;
     private License license;
     private List<Subject> subjects;
+    private List<Section> sectionsHandled;
 
     public List<Subject> getSubjects() {
         return subjects;
+    }
+
+    public List<Section> getSectionsHandled() {
+        return sectionsHandled;
+    }
+
+    public void setSectionsHandled(List<Section> sectionsHandled) {
+        this.sectionsHandled = sectionsHandled;
     }
 
     public void setSubjects(List<Subject> subjects) {
@@ -81,8 +91,13 @@ public class Employee {
                 "\nSubjects: ";
         String sub ="";
         for(Subject subj : subjects) {
-            sub = sub + subj.getSubject() + "\t";
+            sub = sub + subj.getSubject() + "  ";
         }
-        return employee+sub+"\n";
+
+        String sections = "Sections: ";
+        for(Section section : sectionsHandled) {
+            sections = sections + section.getSectionName() + "  ";
+        }
+        return employee+sub+"\n"+sections+"\n";
     }
 }
