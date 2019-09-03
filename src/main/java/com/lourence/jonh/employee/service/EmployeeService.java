@@ -24,7 +24,7 @@ public class EmployeeService {
     public Employee addEmployee(Employee employee){
         try {
             hasEmployeeName(employee.getName());
-            //employee.setEmployeeId(employeeDao.addEmployee(employee));
+            employee = employeeDao.addEmployee(employee);
             if(employee.getEmployeeId() != 0){
                 System.out.println("Added Successfully\nEmployee Id: "+employee.getEmployeeId());
             }

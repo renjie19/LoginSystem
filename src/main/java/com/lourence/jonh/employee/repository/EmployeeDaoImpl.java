@@ -83,8 +83,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployeeByName(String name)throws Exception{
         String insertSql = "select * from employee left join employeeLicense e on employee.id = e.employeeId left join subjects s " +
-                "on employee.id = s.employeeId left join teacherSection t on employee.id = t.employeeId left join section s2 on" +
-                "t.sectionId = s2.sectionId where id = ?";
+                "on employee.id = s.employeeId left join teacherSection t on employee.id = t.employeeId left join section s2 on " +
+                "t.sectionId = s2.sectionId where name = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setString(1,name);
         Employee employee = new Employee();

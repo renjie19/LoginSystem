@@ -23,6 +23,7 @@ class EmployeeDaoTest {
     void before(){
         EmployeeService.getInstance().deleteAllEmployee();
         TimeLogService.getInstance().deleteAllLogs();
+        SectionService.getInstance().deleteAll();
     }
 
     @Test
@@ -226,10 +227,10 @@ class EmployeeDaoTest {
             SectionService.getInstance().addSection(section);
             SectionService.getInstance().addSection(section1);
 
-//            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section.getSectionId());
-//            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section1.getSectionId());
-//            ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section.getSectionId());
-//            ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
+            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section.getSectionId());
+            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section1.getSectionId());
+            ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section.getSectionId());
+            ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
 
             List<Employee> result = employeeDao.getAllEmployees();
             for (Employee employee2 : result) {

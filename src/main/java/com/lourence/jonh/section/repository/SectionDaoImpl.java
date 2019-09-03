@@ -1,5 +1,6 @@
 package com.lourence.jonh.section.repository;
 
+import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.util.MySqlConnector;
 
 import java.sql.PreparedStatement;
@@ -31,12 +32,11 @@ public class SectionDaoImpl implements SectionDao {
 
     @Override
     public void updateSection(Section section) throws Exception {
-        String insertSql = "UPDATE section SET sectionId = ?, sectionName = ?, yearLevel = ? WHERE sectionId = ?";
+        String insertSql = "UPDATE section SET sectionName = ?, yearLevel = ? WHERE sectionId = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1, section.getSectionId());
-        preparedStatement.setString(2,section.getSectionName());
-        preparedStatement.setString(3,section.getYearLevel());
-        preparedStatement.setInt(4,section.getSectionId());
+        preparedStatement.setString(1,section.getSectionName());
+        preparedStatement.setString(2,section.getYearLevel());
+        preparedStatement.setInt(3,section.getSectionId());
         MySqlConnector.getInstance().executeUpdate(preparedStatement);
     }
 
@@ -49,7 +49,8 @@ public class SectionDaoImpl implements SectionDao {
 
     @Override
     public Section getSectionById(int sectionId) throws Exception {
-        String insertSql = "SELECT * FROM section WHERE sectionId = ?";
+        String insertSql = "select * from section left join teacherSection t on section.sectionId = t.sectionId " +
+                " left join employee e on t.employeeId = e.id  where section.sectionId = ? order by sectionName";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,sectionId);
         ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
@@ -62,7 +63,8 @@ public class SectionDaoImpl implements SectionDao {
     @Override
     public List<Section> getAllSections() throws Exception {
         List<Section> sectionList = new ArrayList<Section>();
-        String insertSql = "SELECT * FROM section";
+        String insertSql = "select * from section left join teachersection t on section.sectionId = t.sectionId " +
+                "left join employee e on t.employeeId = e.id order by sectionName";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
         while(resultSet.next()){
@@ -75,6 +77,26 @@ public class SectionDaoImpl implements SectionDao {
         Section section = new Section();
         section.setSectionId(resultSet.getInt("sectionId"));
         section.setSectionName(resultSet.getString("sectionName"));
+        section.setYearLevel(resultSet.getString("yearLevel"));
+        List<Employee> teacherList = new ArrayList<Employee>();
+        Employee employee = new Employee();
+        employee.setEmployeeId(resultSet.getInt("id"));
+        employee.setName(resultSet.getString("name"));
+        employee.setAge(resultSet.getInt("age"));
+        employee.setAddress(resultSet.getString("address"));
+        employee.setPosition(resultSet.getString("position"));
+        teacherList.add(employee);
+        while(resultSet.next() && resultSet.getString("sectionName").equals(section.getSectionName())){
+            employee = new Employee();
+            employee.setEmployeeId(resultSet.getInt("id"));
+            employee.setName(resultSet.getString("name"));
+            employee.setAge(resultSet.getInt("age"));
+            employee.setAddress(resultSet.getString("address"));
+            employee.setPosition(resultSet.getString("position"));
+            teacherList.add(employee);
+        }
+        resultSet.previous();
+        section.setTeachers(teacherList);
         return section;
     }
 }

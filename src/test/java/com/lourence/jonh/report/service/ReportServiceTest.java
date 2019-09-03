@@ -26,7 +26,7 @@ class ReportServiceTest {
         TimeLogService.getInstance().log(employeeResult.getEmployeeId());
 
         String startDate = "2019-08-19";
-        String endDate = "2019-08-28";
+        String endDate = "2019-09-28";
         int employeeId = employeeResult.getEmployeeId();
         ReportService.getInstance().viewEmployeeReportPerDate(employeeId,startDate,endDate);
     }
