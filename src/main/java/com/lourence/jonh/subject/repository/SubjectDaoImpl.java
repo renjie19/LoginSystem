@@ -47,8 +47,7 @@ public class SubjectDaoImpl implements SubjectDao {
     @Override
     public List<Subject> getSubjectsByEmployeeId(int employeeId) throws Exception {
         List<Subject> subjectList = new ArrayList<Subject>();
-        String insertSql = "SELECT name,subjectId,subjectName FROM subjects  join employee on " +
-                "employee.id = subjects.employeeId WHERE employeeId = ?";
+        String insertSql = "select * from subjects where employeeId = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1, employeeId);
         ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
@@ -61,20 +60,20 @@ public class SubjectDaoImpl implements SubjectDao {
     @Override
     public List<Subject> getAllSubjects() throws Exception {
         List<Subject> subjectList = new ArrayList<Subject>();
-        String insertSql = "SELECT subjectId, subjectName FROM subjects GROUP BY subjectId";
+        String insertSql = "SELECT * FROM subjects GROUP BY subjectId";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
         while(resultSet.next()) {
             subjectList.add(generateSubject(resultSet));
         }
-        return subjectList; //returns subjectId and SubjectName only
+        return subjectList;
     }
 
     private Subject generateSubject(ResultSet resultSet) throws Exception {
         Subject subject = new Subject();
         subject.setSubjectCode(resultSet.getInt("subjectId"));
         subject.setSubject(resultSet.getString("subjectName"));
-        subject.setEmployeeName(resultSet.getString("name"));
+        subject.setEmployeeId(resultSet.getInt("employeeId"));
         return subject;
     }
 }

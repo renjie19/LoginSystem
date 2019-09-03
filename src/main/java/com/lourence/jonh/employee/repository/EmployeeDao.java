@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public interface EmployeeDao {
-    int addEmployee(Employee emp) throws Exception;
+    Employee addEmployee(Employee emp) throws Exception;
     int deleteEmployee(Employee emp)throws Exception;
     List<Employee> getAllEmployees()throws Exception;
     Employee getEmployeeById(int employeeID)throws Exception;

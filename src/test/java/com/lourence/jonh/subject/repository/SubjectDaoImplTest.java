@@ -75,7 +75,7 @@ class SubjectDaoImplTest {
             subjectDao.assignSubject(subject1);
 
             List<Subject> subjectList = subjectDao.getSubjectsByEmployeeId(employee.getEmployeeId());
-            System.out.println(subjectList.get(1).getEmployeeName());
+            System.out.println(subjectList.get(1).getEmployeeId());
             for (Subject subject2 : subjectList) {
                 System.out.println("[ "+subject2.getSubjectCode()+" | "+subject2.getSubject()+" ]");
             }

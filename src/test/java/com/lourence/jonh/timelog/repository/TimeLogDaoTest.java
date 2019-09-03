@@ -30,7 +30,7 @@ class TimeLogDaoTest {
         EmployeeDao employeeDao = new EmployeeDaoImpl();
         TimeLogDao timeLogDao = new TimeLogDaoImpl();
         try {
-            employee.setEmployeeId(employeeDao.addEmployee(employee));
+            employee.setEmployeeId(employeeDao.addEmployee(employee).getEmployeeId());
             TimeLog timeLog = new TimeLog();
             timeLog.setId(employee.getEmployeeId());
             TimeLog lastLog = timeLogDao.getLastLogById(timeLog.getId());

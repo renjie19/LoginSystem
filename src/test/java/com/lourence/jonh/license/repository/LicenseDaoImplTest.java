@@ -33,15 +33,15 @@ class LicenseDaoImplTest {
         employee.setPosition("Cha-Cha Queen");
         EmployeeDao employeeDao = new EmployeeDaoImpl();
         try {
-            int employeeId = employeeDao.addEmployee(employee);
+            int employeeId = employeeDao.addEmployee(employee).getEmployeeId();
             LicenseDao licenseDao = new LicenseDaoImpl();
             License license = new License();
             license.setLicenseNumber(226758);
             license.setIssueDate(new Date());
             license.setExpiryDate(new Date());
-            license.setEmployeeId(employeeId);
+            license.setEmployeeId(employee.getEmployeeId());
             licenseDao.addLicenseDetails(license);
-            License savedLicense = licenseDao.getLicenseDetails(employeeId);
+            License savedLicense = licenseDao.getLicenseDetails(employee.getEmployeeId());
             assertEquals(savedLicense.getEmployeeId(),license.getEmployeeId());
             assertEquals(savedLicense.getLicenseNumber(),license.getLicenseNumber());
         }catch(Exception e){
@@ -58,7 +58,7 @@ class LicenseDaoImplTest {
         employee.setPosition("Cha-Cha Queen");
         EmployeeDao employeeDao = new EmployeeDaoImpl();
         try {
-            int employeeId = employeeDao.addEmployee(employee);
+            int employeeId = employeeDao.addEmployee(employee).getEmployeeId();
             LicenseDao licenseDao = new LicenseDaoImpl();
             License license = new License();
             license.setLicenseNumber(226758);

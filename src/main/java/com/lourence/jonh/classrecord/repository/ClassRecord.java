@@ -1,6 +1,6 @@
-package com.lourence.jonh.classes.repository;
+package com.lourence.jonh.classrecord.repository;
 
-public class Classes {
+public class ClassRecord {
     private int classId;
     private int employeeId;
     private int sectionId;
