@@ -140,6 +140,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         subject.setSubjectCode(resultSet.getInt("subjectId"));
         subject.setSubject(resultSet.getString("subjectName"));
+        subject.setEmployeeId(resultSet.getInt("employeeId"));
         subjectList.add(subject);
 
         section.setSectionId(resultSet.getInt("sectionId"));
@@ -160,6 +161,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         license.setLicenseNumber(resultSet.getInt("licenseNumber"));
         license.setExpiryDate(resultSet.getDate("expirationDate"));
         license.setIssueDate(resultSet.getDate("dateIssued"));
+        license.setEmployeeId(resultSet.getInt("employeeId"));
         return license;
     }
 
@@ -168,6 +170,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Subject subject1 = new Subject();
         subject1.setSubjectCode(resultSet.getInt("subjectId"));
         subject1.setSubject(resultSet.getString("subjectName"));
+        subject1.setEmployeeId(resultSet.getInt("employeeId"));
         for(Subject subject2 : subjectList) {
             if(subject2.getSubject().equals(subject1.getSubject())) {
                 matched = true;

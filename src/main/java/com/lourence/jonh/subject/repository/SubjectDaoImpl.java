@@ -10,11 +10,10 @@ import java.util.List;
 public class SubjectDaoImpl implements SubjectDao {
     @Override
     public void assignSubject(Subject subject) throws Exception {
-        String insertSql = "INSERT INTO subjects VALUES(?,?,?)";
+        String insertSql = "INSERT INTO subjects VALUES(?,?)";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1,subject.getSubjectCode());
-        preparedStatement.setString(2,subject.getSubject());
-        preparedStatement.setInt(3,subject.getEmployeeId());
+        preparedStatement.setString(1,subject.getSubject());
+        preparedStatement.setInt(2,subject.getEmployeeId());
         MySqlConnector.getInstance().executeUpdate(preparedStatement);
     }
 
