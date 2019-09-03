@@ -38,7 +38,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployees() throws Exception{
         List<Employee> employeeList = new ArrayList<Employee>();
-        String insertSql = "select employee.*,licenseNumber,subjectName from employee join employeelicense e on" +
+        String insertSql = "select * from employee join employeelicense e on" +
                 " employee.id = e.employeeId join subjects s on employee.id = s.employeeId";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         try {
@@ -58,7 +58,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployeeById(int employeeId)throws Exception{
         Employee employee = new Employee();
-        String insertSql = "select employee.*,licenseNumber,subjectName from employee join employeelicense e on " +
+        String insertSql = "select * from employee join employeelicense e on " +
                 "employee.id = e.employeeId join subjects s on employee.id = s.employeeId where id = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,employeeId);
@@ -79,7 +79,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeByName(String name)throws Exception{
-        String insertSql = "select employee.*,licenseNumber,subjectName from employee join employeelicense e on " +
+        String insertSql = "select * from employee join employeelicense e on " +
                 "employee.id = e.employeeId join subjects s on employee.id = s.employeeId where name = ?";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setString(1,name);
@@ -129,13 +129,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
         employee.setPosition(resultSet.getString("position"));
         License license = new License();
         license.setLicenseNumber(resultSet.getInt("licenseNumber"));
+        license.setExpiryDate(resultSet.getDate("expirationDate"));
+        license.setIssueDate(resultSet.getDate("dateIssued"));
         employee.setLicense(license);
         List<Subject> subjectList = new ArrayList<Subject>();
         Subject subject = new Subject();
+        subject.setSubjectCode(resultSet.getInt("subjectId"));
         subject.setSubject(resultSet.getString("subjectName"));
         subjectList.add(subject);
         while(resultSet.next() && employee.getName().equals(resultSet.getString("name"))) {
             Subject subject1 = new Subject();
+            subject.setSubjectCode(resultSet.getInt("subjectId"));
             subject1.setSubject(resultSet.getString("subjectName"));
             subjectList.add(subject1);
         }
