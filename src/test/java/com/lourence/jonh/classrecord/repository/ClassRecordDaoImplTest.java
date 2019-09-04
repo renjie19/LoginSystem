@@ -7,8 +7,6 @@ import com.lourence.jonh.section.service.SectionService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 class ClassRecordDaoImplTest {
     @BeforeEach
     void before() {
@@ -33,17 +31,6 @@ class ClassRecordDaoImplTest {
         return SectionService.getInstance().addSection(section);
     }
 
-    ClassRecord createClasses() {
-        try {
-            Employee employee = createEmployee();
-            Section section = createSection();
-            ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
-            return classRecordDao.addClassRecord(employee.getEmployeeId(),section.getSectionId());
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     @Test
     void addClassHandled() {
@@ -51,48 +38,11 @@ class ClassRecordDaoImplTest {
             Employee employee = createEmployee();
             Section section = createSection();
             ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
-            ClassRecord classRecord = classRecordDao.addClassRecord(employee.getEmployeeId(),section.getSectionId());
-            assertEquals(classRecord.getEmployeeId(),employee.getEmployeeId());
-            assertEquals(classRecord.getSectionId(),section.getSectionId());
+            classRecordDao.addClassRecord(employee.getEmployeeId(),section.getSectionId());
         }catch(Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    @Test
-    void updateClassHandled() {
-        try {
-            ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
-            ClassRecord classRecord = createClasses();
-            Employee employee = new Employee();
-            employee.setName("Mikey");
-            employee.setAge(26);
-            employee.setAddress("Roxas");
-            employee.setPosition("Teacher II");
-            employee = EmployeeService.getInstance().addEmployee(employee);
-            classRecord.setEmployeeId(employee.getEmployeeId());
-            ClassRecord testClass = classRecordDao.updateClassRecord(classRecord);
-            assertEquals(classRecord.getEmployeeId(),testClass.getEmployeeId());
-            assertEquals(classRecord.getSectionId(),testClass.getSectionId());
-            assertEquals(classRecord.getClassId(),testClass.getClassId());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void testGetClass() {
-        try {
-            ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
-            Employee employee = createEmployee();
-            Section section = createSection();
-            ClassRecord classRecord = createClasses();
-            ClassRecord testClass = classRecordDao.getClassRecord(classRecord.getEmployeeId(), classRecord.getSectionId());
-            assertEquals(testClass.getSectionId(), classRecord.getSectionId());
-            assertEquals(testClass.getEmployeeId(), classRecord.getEmployeeId());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

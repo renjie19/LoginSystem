@@ -5,8 +5,6 @@ import com.lourence.jonh.employee.service.EmployeeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 class SubjectDaoImplTest {
     @BeforeEach
     void before() {
@@ -31,13 +29,9 @@ class SubjectDaoImplTest {
             e.printStackTrace();
         }
 
-        Subject subject = new Subject();
-        subject.setSubjectCode(102);
-        subject.setSubject("Science");
-        subject.setEmployeeId(employee.getEmployeeId());
         try{
             SubjectDao subjectDao = new SubjectDaoImpl();
-            subjectDao.assignSubject(subject);
+            subjectDao.assignSubject("Science",employee.getEmployeeId());
         } catch (Exception e ) {
             System.out.println(e);
         }
@@ -61,24 +55,15 @@ class SubjectDaoImplTest {
             employee.setPosition("Cha-Cha Queen");
             employee = EmployeeService.getInstance().addEmployee(employee);
 
-            Subject subject = new Subject();
-            subject.setSubjectCode(101);
-            subject.setSubject("Math");
-            subject.setEmployeeId(employee.getEmployeeId());
-            Subject subject1 = new Subject();
-            subject1.setSubjectCode(102);
-            subject1.setSubject("Science");
-            subject1.setEmployeeId(employee.getEmployeeId());
-
             SubjectDao subjectDao = new SubjectDaoImpl();
-            subjectDao.assignSubject(subject);
-            subjectDao.assignSubject(subject1);
+            subjectDao.assignSubject("Math",employee.getEmployeeId());
+            subjectDao.assignSubject("Science",employee.getEmployeeId());
 
-            List<Subject> subjectList = subjectDao.getSubjectsByEmployeeId(employee.getEmployeeId());
-            System.out.println(subjectList.get(1).getEmployeeId());
-            for (Subject subject2 : subjectList) {
-                System.out.println("[ "+subject2.getSubjectCode()+" | "+subject2.getSubject()+" ]");
-            }
+//            List<Subject> subjectList = subjectDao.getSubjectsByEmployeeId(employee.getEmployeeId());
+//            System.out.println(subjectList.get(1).getEmployeeId());
+//            for (Subject subject2 : subjectList) {
+//                System.out.println("[ "+subject2.getSubjectCode()+" | "+subject2.getSubject()+" ]");
+//            }
         }catch (Exception e) {
             e.printStackTrace();
         }

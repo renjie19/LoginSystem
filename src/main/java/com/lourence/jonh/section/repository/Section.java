@@ -8,7 +8,7 @@ public class Section {
     private int sectionId;
     private String sectionName;
     private String yearLevel;
-    private List<Employee> teachers;
+    private List<Employee> employees;
 
     public int getSectionId() {
         return sectionId;
@@ -34,12 +34,12 @@ public class Section {
         this.yearLevel = yearLevel;
     }
 
-    public List<Employee> getTeachers() {
-        return teachers;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setTeachers(List<Employee> teachers) {
-        this.teachers = teachers;
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Section {
                 "\nSection Name: " + sectionName +
                 "\nYear Level: " + yearLevel ;
         String teacher="Teachers: ";
-        for (Employee employee : teachers) {
+        for (Employee employee : employees) {
             teacher = teacher + employee.getName() + "  ";
         }
         return section +"\n"+ teacher+"\n";

@@ -3,10 +3,19 @@ package com.lourence.jonh.license.repository;
 import java.util.Date;
 
 public class License {
+    private int licenseId;
     private int licenseNumber;
     private Date issueDate;
     private Date expiryDate;
     private int employeeId;
+
+    public int getLicenseId() {
+        return licenseId;
+    }
+
+    public void setLicenseId(int licenseId) {
+        this.licenseId = licenseId;
+    }
 
     public void setLicenseNumber(int licenseNumber){
         this.licenseNumber = licenseNumber;

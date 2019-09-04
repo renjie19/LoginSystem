@@ -1,12 +1,12 @@
 package com.lourence.jonh.employee.repository;
 
-import com.lourence.jonh.classrecord.service.ClassRecordService;
+import com.lourence.jonh.classrecord.repository.ClassRecordDao;
+import com.lourence.jonh.classrecord.repository.ClassRecordDaoImpl;
 import com.lourence.jonh.employee.service.EmployeeService;
 import com.lourence.jonh.license.repository.License;
 import com.lourence.jonh.license.service.LicenseService;
 import com.lourence.jonh.section.repository.Section;
 import com.lourence.jonh.section.service.SectionService;
-import com.lourence.jonh.subject.repository.Subject;
 import com.lourence.jonh.subject.service.SubjectService;
 import com.lourence.jonh.timelog.service.TimeLogService;
 import org.junit.jupiter.api.BeforeEach;
@@ -121,24 +121,10 @@ class EmployeeDaoTest {
             license.setExpiryDate(new Date());
             LicenseService.getInstance().addLicenseDetails(license);
 
-            Subject subject = new Subject();
-            subject.setSubjectCode(101);
-            subject.setSubject("Math");
-            subject.setEmployeeId(employee.getEmployeeId());
 
-            Subject subject1 = new Subject();
-            subject1.setSubjectCode(102);
-            subject1.setSubject("Science");
-            subject1.setEmployeeId(employee.getEmployeeId());
-
-            Subject subject2 = new Subject();
-            subject2.setSubjectCode(103);
-            subject2.setSubject("Filipino");
-            subject2.setEmployeeId(employee.getEmployeeId());
-
-            SubjectService.getInstance().assignSubject(subject);
-            SubjectService.getInstance().assignSubject(subject1);
-            SubjectService.getInstance().assignSubject(subject2);
+            SubjectService.getInstance().assignSubject("Math",employee.getEmployeeId());
+            SubjectService.getInstance().assignSubject("Science",employee.getEmployeeId());
+            SubjectService.getInstance().assignSubject("Filipino",employee.getEmployeeId());
 
             Section section = new Section();
             section.setSectionName("Rose");
@@ -150,9 +136,9 @@ class EmployeeDaoTest {
             section1.setSectionId(employee.getEmployeeId());
             SectionService.getInstance().addSection(section);
             SectionService.getInstance().addSection(section1);
-
-            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section.getSectionId());
-            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section1.getSectionId());
+            ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
+            classRecordDao.addClassRecord(employee.getEmployeeId(),section.getSectionId());
+            classRecordDao.addClassRecord(employee.getEmployeeId(),section1.getSectionId());
 
             Employee result = employeeDao.getEmployeeById(employee.getEmployeeId());
             System.out.println(result);
@@ -194,27 +180,10 @@ class EmployeeDaoTest {
             license1.setExpiryDate(new Date());
             LicenseService.getInstance().addLicenseDetails(license1);
 
-            Subject subject = new Subject();
-            subject.setSubjectCode(101);
-            subject.setSubject("Math");
-            subject.setEmployeeId(employee.getEmployeeId());
-            Subject subject1 = new Subject();
-            subject1.setSubjectCode(102);
-            subject1.setSubject("Science");
-            subject1.setEmployeeId(employee.getEmployeeId());
-            SubjectService.getInstance().assignSubject(subject);
-            SubjectService.getInstance().assignSubject(subject1);
-
-            Subject subject2 = new Subject();
-            subject2.setSubjectCode(103);
-            subject2.setSubject("Filipino");
-            subject2.setEmployeeId(employee1.getEmployeeId());
-            Subject subject3 = new Subject();
-            subject3.setSubjectCode(104);
-            subject3.setSubject("PE");
-            subject3.setEmployeeId(employee1.getEmployeeId());
-            SubjectService.getInstance().assignSubject(subject2);
-            SubjectService.getInstance().assignSubject(subject3);
+            SubjectService.getInstance().assignSubject("Math",employee.getEmployeeId());
+            SubjectService.getInstance().assignSubject("Science",employee.getEmployeeId());
+            SubjectService.getInstance().assignSubject("Filipino",employee1.getEmployeeId());
+            SubjectService.getInstance().assignSubject("PE",employee1.getEmployeeId());
 
             Section section = new Section();
             section.setSectionName("Rose");
@@ -222,15 +191,14 @@ class EmployeeDaoTest {
             Section section1 = new Section();
             section1.setSectionName("Lily");
             section1.setYearLevel("Grade 11");
-
-
             SectionService.getInstance().addSection(section);
             SectionService.getInstance().addSection(section1);
 
-            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section.getSectionId());
-            ClassRecordService.getInstance().addClassRecord(employee.getEmployeeId(),section1.getSectionId());
-            ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section.getSectionId());
-            ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
+            ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
+            classRecordDao.addClassRecord(employee.getEmployeeId(),section.getSectionId());
+            classRecordDao.addClassRecord(employee.getEmployeeId(),section1.getSectionId());
+            classRecordDao.addClassRecord(employee1.getEmployeeId(),section.getSectionId());
+            classRecordDao.addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
 
             List<Employee> result = employeeDao.getAllEmployees();
             for (Employee employee2 : result) {

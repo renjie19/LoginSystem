@@ -1,6 +1,7 @@
 package com.lourence.jonh.section.repository;
 
-import com.lourence.jonh.classrecord.service.ClassRecordService;
+import com.lourence.jonh.classrecord.repository.ClassRecordDao;
+import com.lourence.jonh.classrecord.repository.ClassRecordDaoImpl;
 import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.employee.service.EmployeeService;
 import com.lourence.jonh.section.service.SectionService;
@@ -110,12 +111,12 @@ class SectionDaoImplTest {
         Employee employee2 = createEmployee2();
         Section section1 = createSection1();
         Section section2 = createSection2();
-
-        ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
-        ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section2.getSectionId());
-        ClassRecordService.getInstance().addClassRecord(employee2.getEmployeeId(),section1.getSectionId());
-        ClassRecordService.getInstance().addClassRecord(employee2.getEmployeeId(),section2.getSectionId());
+        ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
         try {
+            classRecordDao.addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
+            classRecordDao.addClassRecord(employee1.getEmployeeId(),section2.getSectionId());
+            classRecordDao.addClassRecord(employee2.getEmployeeId(),section1.getSectionId());
+            classRecordDao.addClassRecord(employee2.getEmployeeId(),section2.getSectionId());
             SectionDao repository = new SectionDaoImpl();
             Section result = repository.getSectionById(section1.getSectionId());
             System.out.println(result);
@@ -131,11 +132,12 @@ class SectionDaoImplTest {
         Section section1 = createSection1();
         Section section2 = createSection2();
 
-        ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
-        ClassRecordService.getInstance().addClassRecord(employee1.getEmployeeId(),section2.getSectionId());
-        ClassRecordService.getInstance().addClassRecord(employee2.getEmployeeId(),section1.getSectionId());
-        ClassRecordService.getInstance().addClassRecord(employee2.getEmployeeId(),section2.getSectionId());
+        ClassRecordDao classRecordDao = new ClassRecordDaoImpl();
         try {
+            classRecordDao.addClassRecord(employee1.getEmployeeId(),section1.getSectionId());
+            classRecordDao.addClassRecord(employee1.getEmployeeId(),section2.getSectionId());
+            classRecordDao.addClassRecord(employee2.getEmployeeId(),section1.getSectionId());
+            classRecordDao.addClassRecord(employee2.getEmployeeId(),section2.getSectionId());
             SectionDao repository = new SectionDaoImpl();
             List<Section> sectionList = repository.getAllSections();
             for(Section section : sectionList) {

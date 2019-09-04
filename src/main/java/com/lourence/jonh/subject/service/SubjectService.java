@@ -21,9 +21,9 @@ public class SubjectService {
         return service;
     }
 
-    public void assignSubject(Subject subject) {
+    public void assignSubject(String subjectName,int employeeId) {
         try{
-            repository.assignSubject(subject);
+            repository.assignSubject(subjectName,employeeId);
         }catch (Exception e) {
             e.printStackTrace();
         }

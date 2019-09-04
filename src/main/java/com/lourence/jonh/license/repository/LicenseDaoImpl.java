@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 public class LicenseDaoImpl implements LicenseDao {
     @Override
     public void addLicenseDetails(License teachingLicense) throws  Exception {
-        String insertSql = "INSERT INTO employeeLicense VALUES(?,?,?,?)";
+        String insertSql = "INSERT INTO employeeLicense(licenseNumber,dateIssued,expirationDate,employeeId) VALUES(?,?,?,?)";
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,teachingLicense.getLicenseNumber());
         preparedStatement.setDate(2,new Date(teachingLicense.getIssueDate().getTime()));
@@ -57,6 +57,7 @@ public class LicenseDaoImpl implements LicenseDao {
 
     private License generateLicense(ResultSet resultSet) throws  Exception {
         License license = new License();
+        license.setLicenseId(resultSet.getInt("licenseId"));
         license.setLicenseNumber(resultSet.getInt("licenseNumber"));
         license.setIssueDate(resultSet.getDate("dateIssued"));
         license.setExpiryDate(resultSet.getDate("expirationDate"));

@@ -78,14 +78,14 @@ public class SectionDaoImpl implements SectionDao {
         section.setSectionId(resultSet.getInt("sectionId"));
         section.setSectionName(resultSet.getString("sectionName"));
         section.setYearLevel(resultSet.getString("yearLevel"));
-        List<Employee> teacherList = new ArrayList<Employee>();
+        List<Employee> employeeList = new ArrayList<Employee>();
         Employee employee = new Employee();
         employee.setEmployeeId(resultSet.getInt("id"));
         employee.setName(resultSet.getString("name"));
         employee.setAge(resultSet.getInt("age"));
         employee.setAddress(resultSet.getString("address"));
         employee.setPosition(resultSet.getString("position"));
-        teacherList.add(employee);
+        employeeList.add(employee);
         while(resultSet.next() && resultSet.getString("sectionName").equals(section.getSectionName())){
             employee = new Employee();
             employee.setEmployeeId(resultSet.getInt("id"));
@@ -93,10 +93,10 @@ public class SectionDaoImpl implements SectionDao {
             employee.setAge(resultSet.getInt("age"));
             employee.setAddress(resultSet.getString("address"));
             employee.setPosition(resultSet.getString("position"));
-            teacherList.add(employee);
+            employeeList.add(employee);
         }
         resultSet.previous();
-        section.setTeachers(teacherList);
+        section.setEmployees(employeeList);
         return section;
     }
 }
