@@ -11,6 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+    private static EmployeeDaoImpl employeeDao;
+
+    private EmployeeDaoImpl() {
+    }
+
+    public static EmployeeDaoImpl getInstance() {
+        if(employeeDao==null) {
+            employeeDao = new EmployeeDaoImpl();
+        }
+        return employeeDao;
+    }
 
     @Override
     public Employee addEmployee(Employee employee)throws Exception {

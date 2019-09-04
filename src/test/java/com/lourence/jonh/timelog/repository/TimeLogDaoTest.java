@@ -13,9 +13,9 @@ class TimeLogDaoTest {
 
     @BeforeEach
     void before(){
-        TimeLogDao timeLogDao = new TimeLogDaoImpl();
+        TimeLogDao timeLogDao = TimeLogDaoImpl.getInstance();
         timeLogDao.deleteAllLogs();
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         employeeDao.deleteAllEmployee();
 
     }
@@ -27,8 +27,8 @@ class TimeLogDaoTest {
         employee.setAge(45);
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
-        TimeLogDao timeLogDao = new TimeLogDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
+        TimeLogDao timeLogDao = TimeLogDaoImpl.getInstance();
         try {
             employee.setEmployeeId(employeeDao.addEmployee(employee).getEmployeeId());
             TimeLog timeLog = new TimeLog();

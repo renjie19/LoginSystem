@@ -9,6 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SectionDaoImpl implements SectionDao {
+    private static SectionDaoImpl sectionDao;
+
+    private SectionDaoImpl() {
+    }
+
+    public static SectionDaoImpl getInstance() {
+        if(sectionDao==null) {
+            sectionDao = new SectionDaoImpl();
+        }
+        return sectionDao;
+    }
+
     @Override
     public Section addSection(Section section) throws Exception {
         String insertSql = "INSERT INTO section(sectionName,yearLevel) VALUES(?,?)";

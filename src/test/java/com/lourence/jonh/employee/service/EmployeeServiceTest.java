@@ -77,5 +77,6 @@ class EmployeeServiceTest {
         Employee existingEmployee = EmployeeService.getInstance().getEmployeeById(employee1.getEmployeeId());
         assertNotEquals(nonExistingEmployee.getEmployeeId(),1);
         assertEquals(existingEmployee.getEmployeeId(),employee1.getEmployeeId());
+        System.out.println(existingEmployee);
     }
 }

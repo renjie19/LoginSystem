@@ -11,7 +11,7 @@ public class EmployeeService {
     private EmployeeDao employeeDao;
 
     private EmployeeService(){
-        employeeDao = new EmployeeDaoImpl();
+        employeeDao = EmployeeDaoImpl.getInstance();
     }
 
     public static EmployeeService getInstance(){

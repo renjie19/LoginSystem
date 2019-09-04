@@ -9,7 +9,7 @@ public class SectionService {
     private SectionDao sectionDao;
 
     private SectionService(){
-        sectionDao = new SectionDaoImpl();
+        sectionDao = SectionDaoImpl.getInstance();
     }
 
     public static SectionService getInstance() {

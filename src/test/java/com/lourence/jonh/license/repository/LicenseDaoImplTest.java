@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class LicenseDaoImplTest {
     @BeforeEach
     void before(){
-        LicenseDao licenseDao = new LicenseDaoImpl();
+        LicenseDao licenseDao = LicenseDaoImpl.getInstance();
         try {
             licenseDao.deleteAllLicense();
             EmployeeService.getInstance().deleteAllEmployee();
@@ -31,10 +31,10 @@ class LicenseDaoImplTest {
         employee.setAge(45);
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         try {
             int employeeId = employeeDao.addEmployee(employee).getEmployeeId();
-            LicenseDao licenseDao = new LicenseDaoImpl();
+            LicenseDao licenseDao = LicenseDaoImpl.getInstance();
             License license = new License();
             license.setLicenseNumber(226758);
             license.setIssueDate(new Date());
@@ -56,10 +56,10 @@ class LicenseDaoImplTest {
         employee.setAge(45);
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         try {
             int employeeId = employeeDao.addEmployee(employee).getEmployeeId();
-            LicenseDao licenseDao = new LicenseDaoImpl();
+            LicenseDao licenseDao = LicenseDaoImpl.getInstance();
             License license = new License();
             license.setLicenseNumber(226758);
             license.setIssueDate(new Date());

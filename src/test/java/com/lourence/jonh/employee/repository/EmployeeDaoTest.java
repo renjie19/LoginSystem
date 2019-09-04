@@ -33,7 +33,7 @@ class EmployeeDaoTest {
         employee.setAge(45);
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         Employee savedEmployee = new Employee();
         try {
             savedEmployee = employeeDao.addEmployee(employee);
@@ -48,7 +48,7 @@ class EmployeeDaoTest {
 
     @Test
     void deleteEmployee() {
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         List<Employee> employeeList = new ArrayList<Employee>();
         Employee employee = new Employee();
         employee.setName("Gloria Arroyo");
@@ -57,7 +57,7 @@ class EmployeeDaoTest {
         employee.setPosition("Cha-Cha Queen");
         Employee savedEmployee = new Employee();
         try {
-            //savedEmployee = employeeDao.getEmployeeById(employeeDao.addEmployee(employee));
+            savedEmployee = employeeDao.getEmployeeById(employeeDao.addEmployee(employee).getEmployeeId());
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -75,7 +75,7 @@ class EmployeeDaoTest {
 
     @Test
     void updateEmployee() {
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         Employee employee = new Employee();
         employee.setName("Gloria Arroyo");
         employee.setAge(45);
@@ -110,7 +110,7 @@ class EmployeeDaoTest {
         employee.setAge(45);
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         try {
             employee = employeeDao.addEmployee(employee);
 
@@ -161,7 +161,7 @@ class EmployeeDaoTest {
         employee1.setAddress("Manila");
         employee1.setPosition("President");
 
-        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        EmployeeDao employeeDao = EmployeeDaoImpl.getInstance();
         try {
             employee = employeeDao.addEmployee(employee);
             employee1 = employeeDao.addEmployee(employee1);

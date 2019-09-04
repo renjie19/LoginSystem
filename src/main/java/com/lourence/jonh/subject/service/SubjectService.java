@@ -11,7 +11,7 @@ public class SubjectService {
     private SubjectDao repository;
 
     private SubjectService() {
-        this.repository = new SubjectDaoImpl();
+        this.repository = SubjectDaoImpl.getInstance();
     }
 
     public static SubjectService getInstance() {

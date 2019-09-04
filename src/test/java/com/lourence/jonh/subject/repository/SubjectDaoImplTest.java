@@ -30,7 +30,7 @@ class SubjectDaoImplTest {
         }
 
         try{
-            SubjectDao subjectDao = new SubjectDaoImpl();
+            SubjectDao subjectDao = SubjectDaoImpl.getInstance();
             subjectDao.assignSubject("Science",employee.getEmployeeId());
         } catch (Exception e ) {
             System.out.println(e);
@@ -55,7 +55,7 @@ class SubjectDaoImplTest {
             employee.setPosition("Cha-Cha Queen");
             employee = EmployeeService.getInstance().addEmployee(employee);
 
-            SubjectDao subjectDao = new SubjectDaoImpl();
+            SubjectDao subjectDao = SubjectDaoImpl.getInstance();
             subjectDao.assignSubject("Math",employee.getEmployeeId());
             subjectDao.assignSubject("Science",employee.getEmployeeId());
 

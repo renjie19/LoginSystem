@@ -10,7 +10,7 @@ public class TimeLogService {
     private TimeLogDao timeLogDao;
     
     private TimeLogService(){
-        timeLogDao = new TimeLogDaoImpl();
+        timeLogDao = TimeLogDaoImpl.getInstance();
     }
     
     public static TimeLogService getInstance(){

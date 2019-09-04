@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ReportService {
     private static ReportService reportService;
-    private ReportDao reportDao = new ReportDaoImpl();
+    private ReportDao reportDao = ReportDaoImpl.getInstance();
 
     private ReportService(){}
 

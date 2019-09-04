@@ -8,6 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubjectDaoImpl implements SubjectDao {
+    private static SubjectDaoImpl subjectDao;
+
+    private SubjectDaoImpl() {
+    }
+
+    public static SubjectDaoImpl getInstance() {
+        if(subjectDao==null) {
+            subjectDao = new SubjectDaoImpl();
+        }
+        return subjectDao;
+    }
+
     @Override
     public void assignSubject(String subjectName,int employeeId) throws Exception {
         String insertSql = "INSERT INTO subject(subjectName,employeeId)VALUES(?,?)";

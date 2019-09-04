@@ -9,7 +9,7 @@ public class LicenseService {
     private LicenseDao licenseDao;
 
     private LicenseService(){
-        licenseDao = new LicenseDaoImpl();
+        licenseDao = LicenseDaoImpl.getInstance();
     }
 
     public static LicenseService getInstance() {

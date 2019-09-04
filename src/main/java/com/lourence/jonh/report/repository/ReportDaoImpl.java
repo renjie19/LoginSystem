@@ -8,6 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportDaoImpl implements ReportDao {
+    private static ReportDaoImpl reportDao;
+
+    private ReportDaoImpl() {
+    }
+
+    public static ReportDaoImpl getInstance() {
+        if(reportDao==null) {
+            reportDao = new ReportDaoImpl();
+        }
+        return reportDao;
+    }
 
     @Override
     public List<Report> getReportsBetweenDatesById(int employeeId, String startDate, String endDate) throws Exception{

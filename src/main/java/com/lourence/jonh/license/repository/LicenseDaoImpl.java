@@ -7,6 +7,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class LicenseDaoImpl implements LicenseDao {
+    private static LicenseDaoImpl licenseDao;
+
+    private LicenseDaoImpl() {
+    }
+
+    public static LicenseDaoImpl getInstance() {
+        if(licenseDao==null) {
+            licenseDao = new LicenseDaoImpl();
+        }
+        return licenseDao;
+    }
+
     @Override
     public void addLicenseDetails(License teachingLicense) throws  Exception {
         String insertSql = "INSERT INTO employeeLicense(licenseNumber,dateIssued,expirationDate,employeeId) VALUES(?,?,?,?)";

@@ -19,7 +19,7 @@ class SectionDaoImplTest {
     void before() {
         try {
             EmployeeService.getInstance().deleteAllEmployee();
-            SectionDao sectionDao = new SectionDaoImpl();
+            SectionDao sectionDao = SectionDaoImpl.getInstance();
             sectionDao.deleteAll();
         }catch (Exception e){
             e.printStackTrace();
@@ -64,7 +64,7 @@ class SectionDaoImplTest {
             Section section = new Section();
             section.setSectionName("Rose");
             section.setYearLevel("Grade 7");
-            SectionDao sectionDao = new SectionDaoImpl();
+            SectionDao sectionDao = SectionDaoImpl.getInstance();
             Section savedSection = sectionDao.addSection(section);
             assertEquals(section.getSectionName(),savedSection.getSectionName());
             assertEquals(section.getYearLevel(),savedSection.getYearLevel());
@@ -79,7 +79,7 @@ class SectionDaoImplTest {
         try {
             Section section = new Section();
             section.setSectionName("Rose");
-            SectionDao sectionDao = new SectionDaoImpl();
+            SectionDao sectionDao = SectionDaoImpl.getInstance();
             Section savedSection = sectionDao.addSection(section);
             sectionDao.deleteSection(savedSection.getSectionId());
             Section afterDelete = sectionDao.getSectionById(savedSection.getSectionId());
@@ -95,7 +95,7 @@ class SectionDaoImplTest {
             Section section = new Section();
             section.setSectionName("Rose");
             section.setYearLevel("Grade 7");
-            SectionDao sectionDao = new SectionDaoImpl();
+            SectionDao sectionDao = SectionDaoImpl.getInstance();
             Section savedSection = sectionDao.addSection(section);
            savedSection.setSectionName("Lily");
            sectionDao.updateSection(savedSection);
@@ -117,7 +117,7 @@ class SectionDaoImplTest {
             classRecordDao.addClassRecord(employee1.getEmployeeId(),section2.getSectionId());
             classRecordDao.addClassRecord(employee2.getEmployeeId(),section1.getSectionId());
             classRecordDao.addClassRecord(employee2.getEmployeeId(),section2.getSectionId());
-            SectionDao repository = new SectionDaoImpl();
+            SectionDao repository = SectionDaoImpl.getInstance();
             Section result = repository.getSectionById(section1.getSectionId());
             System.out.println(result);
         }catch (Exception e) {
@@ -138,7 +138,7 @@ class SectionDaoImplTest {
             classRecordDao.addClassRecord(employee1.getEmployeeId(),section2.getSectionId());
             classRecordDao.addClassRecord(employee2.getEmployeeId(),section1.getSectionId());
             classRecordDao.addClassRecord(employee2.getEmployeeId(),section2.getSectionId());
-            SectionDao repository = new SectionDaoImpl();
+            SectionDao repository = SectionDaoImpl.getInstance();
             List<Section> sectionList = repository.getAllSections();
             for(Section section : sectionList) {
                 System.out.println(section);

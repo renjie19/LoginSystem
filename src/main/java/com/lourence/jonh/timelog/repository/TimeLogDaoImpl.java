@@ -6,6 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class TimeLogDaoImpl implements TimeLogDao {
+    private static TimeLogDaoImpl timeLogDao;
+
+    private TimeLogDaoImpl() {
+
+    }
+
+    public static TimeLogDaoImpl getInstance() {
+        if(timeLogDao==null) {
+            timeLogDao = new TimeLogDaoImpl();
+        }
+        return timeLogDao;
+    }
     
     @Override
     public int addLog(TimeLog log)throws Exception{
