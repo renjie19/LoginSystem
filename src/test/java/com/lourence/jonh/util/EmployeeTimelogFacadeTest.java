@@ -2,7 +2,6 @@ package com.lourence.jonh.util;
 
 import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.employee.service.EmployeeService;
-import com.lourence.jonh.license.service.LicenseService;
 import com.lourence.jonh.timelog.repository.TimeLog;
 import com.lourence.jonh.timelog.service.TimeLogService;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class EmployeeTimelogFacadeTest {
     @BeforeEach
     void before(){
-        LicenseService.getInstance().deleteAll();
+//        LicenseService.getInstance().deleteAll();
         EmployeeService.getInstance().deleteAllEmployee();
         TimeLogService.getInstance().deleteAllLogs();
     }

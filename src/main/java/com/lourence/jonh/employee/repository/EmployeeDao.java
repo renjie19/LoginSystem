@@ -5,10 +5,10 @@ import java.util.List;
 
 
 public interface EmployeeDao {
-    Employee addEmployee(Employee emp) throws Exception;
+    Employee addEmployee(Employee emp);
     int deleteEmployee(Employee emp)throws Exception;
-    List<Employee> getAllEmployees()throws Exception;
-    Employee getEmployeeById(int employeeID)throws Exception;
+    List<Employee> getAllEmployees();
+    Employee getEmployeeById(int employeeID);
     Employee getEmployeeByName(String name)throws Exception;
     void updateEmployee(Employee emp)throws Exception;
     void deleteAllEmployee();

@@ -22,11 +22,7 @@ public class SubjectService {
     }
 
     public void assignSubject(String subjectName,int employeeId) {
-        try{
-            repository.assignSubject(subjectName,employeeId);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     public void deleteAll() {
@@ -48,7 +44,6 @@ public class SubjectService {
     public void getSubjectsByEmployee(int employeeId) {
         try {
             List<Subject> subjectList = repository.getSubjectsByEmployeeId(employeeId);
-            System.out.println(subjectList.get(0).getEmployeeId());
             for(Subject subject : subjectList) {
                 System.out.println(" > "+subject.getSubjectCode()+ " | "+ subject.getSubject());
             }

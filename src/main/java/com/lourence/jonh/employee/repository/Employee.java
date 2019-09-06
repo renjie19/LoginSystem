@@ -4,21 +4,26 @@ import com.lourence.jonh.license.repository.License;
 import com.lourence.jonh.section.repository.Section;
 import com.lourence.jonh.subject.repository.Subject;
 
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
 public class Employee {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
     private String name;
     private int age;
     private String address;
     private String position;
+    @OneToOne
+    @JoinColumn
     private License license;
+    @OneToMany
+    @JoinColumn
     private List<Subject> subjects;
+    @ManyToMany
+    @JoinTable
     private List<Section> sectionsHandled;
-
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
 
     public List<Section> getSectionsHandled() {
         return sectionsHandled;
@@ -26,6 +31,10 @@ public class Employee {
 
     public void setSectionsHandled(List<Section> sectionsHandled) {
         this.sectionsHandled = sectionsHandled;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
     }
 
     public void setSubjects(List<Subject> subjects) {
@@ -80,24 +89,24 @@ public class Employee {
         this.position = position;
     }
 
-    @Override
-    public String toString() {
-        String employee = "Employee Id:" + employeeId +
-                "\nName: "+ name+
-                "\nAge: "+ age +
-                "\nAddress: " + address +
-                "\nPosition: " + position +
-                "\nLicense: " + license.getLicenseNumber() +
-                "\nSubjects: ";
-        String sub ="";
-        for(Subject subj : subjects) {
-            sub = sub + subj.getSubject() + "  ";
-        }
-
-        String sections = "Sections: ";
-        for(Section section : sectionsHandled) {
-            sections = sections + section.getSectionName() + "  ";
-        }
-        return employee+sub+"\n"+sections+"\n";
-    }
+//    @Override
+//    public String toString() {
+//        String employee = "Employee Id:" + employeeId +
+//                "\nName: "+ name+
+//                "\nAge: "+ age +
+//                "\nAddress: " + address +
+//                "\nPosition: " + position +
+//                "\nLicense: " + license.getLicenseNumber() +
+//                "\nSubjects: ";
+//        String sub ="";
+//        for(Subject subj : subjects) {
+//            sub = sub + subj.getSubject() + "  ";
+//        }
+//
+//        String sections = "Sections: ";
+//        for(Section section : sectionsHandled) {
+//            sections = sections + section.getSectionName() + "  ";
+//        }
+//        return employee+sub+"\n"+sections+"\n";
+//    }
 }

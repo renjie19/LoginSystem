@@ -1,5 +1,6 @@
 package com.lourence.jonh.subject.repository;
 
+import com.lourence.jonh.util.Hibernate;
 import com.lourence.jonh.util.MySqlConnector;
 
 import java.sql.PreparedStatement;
@@ -21,14 +22,11 @@ public class SubjectDaoImpl implements SubjectDao {
     }
 
     @Override
-    public void assignSubject(String subjectName,int employeeId) throws Exception {
-        String insertSql = "INSERT INTO subject(subjectName,employeeId)VALUES(?,?)";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setString(1,subjectName);
-        preparedStatement.setInt(2,employeeId);
-        MySqlConnector.getInstance().executeUpdate(preparedStatement);
+    public void assignSubject(Subject subject) {
+        Hibernate hibernate = new Hibernate();
+        hibernate.persist(subject);
     }
-
+// ================== UNFINISHED ==================
     @Override
     public void deleteSubjectAssignment(String subjectName) throws Exception {
         String insertSql = "DELETE FROM subject WHERE subjectName = ?";
@@ -50,7 +48,6 @@ public class SubjectDaoImpl implements SubjectDao {
         PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
         preparedStatement.setInt(1,subject.getSubjectCode());
         preparedStatement.setString(2,subject.getSubject());
-        preparedStatement.setInt(3,subject.getEmployeeId());
         preparedStatement.setInt(4,subject.getSubjectCode());
         MySqlConnector.getInstance().executeUpdate(preparedStatement);
     }
@@ -84,7 +81,6 @@ public class SubjectDaoImpl implements SubjectDao {
         Subject subject = new Subject();
         subject.setSubjectCode(resultSet.getInt("subjectId"));
         subject.setSubject(resultSet.getString("subjectName"));
-        subject.setEmployeeId(resultSet.getInt("employeeId"));
         return subject;
     }
 }

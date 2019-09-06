@@ -1,6 +1,7 @@
 package com.lourence.jonh.section.repository;
 
 import com.lourence.jonh.employee.repository.Employee;
+import com.lourence.jonh.util.Hibernate;
 import com.lourence.jonh.util.MySqlConnector;
 
 import java.sql.PreparedStatement;
@@ -22,34 +23,22 @@ public class SectionDaoImpl implements SectionDao {
     }
 
     @Override
-    public Section addSection(Section section) throws Exception {
-        String insertSql = "INSERT INTO section(sectionName,yearLevel) VALUES(?,?)";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setString(1,section.getSectionName());
-        preparedStatement.setString(2,section.getYearLevel());
-        MySqlConnector.getInstance().execute(preparedStatement);
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        resultSet.next();
-        section.setSectionId(resultSet.getInt(1));
-        return section;
+    public Section addSection(Section section) {
+        Hibernate hibernate = new Hibernate();
+        hibernate.persist(section);
+        return null;
     }
 
     @Override
     public void deleteSection(int sectionId) throws Exception {
-        String insertSql = "DELETE FROM section WHERE sectionId = ?";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1,sectionId);
-        MySqlConnector.getInstance().executeUpdate(preparedStatement);
+        Hibernate hibernate = new Hibernate();
+        hibernate.remove(Section.class,sectionId);
     }
 
     @Override
     public void updateSection(Section section) throws Exception {
-        String insertSql = "UPDATE section SET sectionName = ?, yearLevel = ? WHERE sectionId = ?";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setString(1,section.getSectionName());
-        preparedStatement.setString(2,section.getYearLevel());
-        preparedStatement.setInt(3,section.getSectionId());
-        MySqlConnector.getInstance().executeUpdate(preparedStatement);
+        Hibernate hibernate = new Hibernate();
+        hibernate.merge(section);
     }
 
     @Override
@@ -60,16 +49,9 @@ public class SectionDaoImpl implements SectionDao {
     }
 
     @Override
-    public Section getSectionById(int sectionId) throws Exception {
-        String insertSql = "select * from section left join teacherSection t on section.sectionId = t.sectionId " +
-                " left join employee e on t.employeeId = e.id  where section.sectionId = ? order by sectionName";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1,sectionId);
-        ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
-        if(resultSet.next()){
-            return generateSection(resultSet);
-        }
-        return null;
+    public Section getSectionById(int sectionId) {
+        Hibernate hibernate = new Hibernate();
+        return (Section)hibernate.find(Section.class,sectionId);
     }
 
     @Override

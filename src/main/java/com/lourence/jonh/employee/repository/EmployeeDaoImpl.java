@@ -3,6 +3,7 @@ package com.lourence.jonh.employee.repository;
 import com.lourence.jonh.license.repository.License;
 import com.lourence.jonh.section.repository.Section;
 import com.lourence.jonh.subject.repository.Subject;
+import com.lourence.jonh.util.Hibernate;
 import com.lourence.jonh.util.MySqlConnector;
 
 import java.sql.PreparedStatement;
@@ -24,19 +25,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee addEmployee(Employee employee)throws Exception {
-        String insertSql = "INSERT INTO employee(name,age,address,position)VALUES(?,?,?,?)";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setString(1,employee.getName());
-        preparedStatement.setInt(2,employee.getAge());
-        preparedStatement.setString(3,employee.getAddress());
-        preparedStatement.setString(4,employee.getPosition());
-        MySqlConnector.getInstance().execute(preparedStatement);
-        ResultSet resultSet = preparedStatement.getGeneratedKeys();
-        resultSet.next();
-        employee.setEmployeeId(resultSet.getInt(1));
-        MySqlConnector.getInstance().closeConnection();
-        return employee;
+    public Employee addEmployee(Employee employee){
+        Hibernate hibernate = new Hibernate();
+        hibernate.persist(employee);
+        return null;
     }
 
     @Override
@@ -48,46 +40,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> getAllEmployees() throws Exception{
-        List<Employee> employeeList = new ArrayList<Employee>();
-        String insertSql = "select * from employee left join employeeLicense e on employee.id = e.employeeId left join subject s" +
-                " on employee.id = s.employeeId left join teacherSection t on employee.id = t.employeeId left join section s2 on " +
-                "t.sectionId = s2.sectionId";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        try {
-            ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
-            while (resultSet.next()) {
-                 Employee employee = generateEmployee(resultSet);
-                employeeList.add(employee);
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally {
-            MySqlConnector.getInstance().closeConnection();
-        }
-        return employeeList;
+    public List<Employee> getAllEmployees() {
+        String insertSql = "SELECT e from employee e";
+        Hibernate hibernate = new Hibernate();
+        hibernate.createNamedQuery(insertSql);
+        return null;
     }
 
     @Override
-    public Employee getEmployeeById(int employeeId)throws Exception{
-        Employee employee = new Employee();
-        String insertSql = "select * from employee left join employeeLicense e on employee.id = e.employeeId left join subject s " +
-                "on employee.id = s.employeeId left join teacherSection t on employee.id = t.employeeId left join section s2 on " +
-                "t.sectionId = s2.sectionId where id = ?";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1,employeeId);
-        try {
-            ResultSet resultSet = MySqlConnector.getInstance().executeQuery(preparedStatement);
-            if (resultSet.next()) {
-                employee = generateEmployee(resultSet);
-            }else{
-                employee = new Employee();
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }finally{
-            MySqlConnector.getInstance().closeConnection();
-        }
+    public Employee getEmployeeById(int employeeId){
+        Hibernate hibernate = new Hibernate();
+        Employee employee = (Employee)hibernate.find(Employee.class,employeeId);
         return employee;
     }
 
@@ -114,25 +77,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public void updateEmployee(Employee employee) throws Exception{
-        String insertSql = "UPDATE employee SET name = ?, age = ?, address = ?,position = ? WHERE id = ?";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setString(1,employee.getName());
-        preparedStatement.setInt(2,employee.getAge());
-        preparedStatement.setString(3,employee.getAddress());
-        preparedStatement.setString(4,employee.getPosition());
-        preparedStatement.setInt(5,employee.getEmployeeId());
-        MySqlConnector.getInstance().executeUpdate(preparedStatement);
+        Hibernate hibernate = new Hibernate();
+        hibernate.merge(employee);
     }
 
     @Override
     public void deleteAllEmployee(){
-        try {
-            String insertSql = "DELETE FROM employee";
-            PreparedStatement prepareStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-            MySqlConnector.getInstance().executeUpdate(prepareStatement);
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        String insertSql = "DELETE FROM employee";
+        Hibernate hibernate = new Hibernate();
+        hibernate.createNativeQuery(insertSql);
     }
 
     private Employee generateEmployee(ResultSet resultSet)throws Exception{
@@ -142,7 +95,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         employee.setAge(resultSet.getInt("age"));
         employee.setAddress(resultSet.getString("address"));
         employee.setPosition(resultSet.getString("position"));
-        employee.setLicense(generateLicense(resultSet));
+        //employee.setLicense(generateLicense(resultSet));
 
         List<Subject> subjectList = new ArrayList<Subject>();
         Subject subject = new Subject();
@@ -151,7 +104,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         subject.setSubjectCode(resultSet.getInt("subjectId"));
         subject.setSubject(resultSet.getString("subjectName"));
-        subject.setEmployeeId(resultSet.getInt("employeeId"));
         subjectList.add(subject);
 
         section.setSectionId(resultSet.getInt("sectionId"));
@@ -163,17 +115,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
            sectionList = generateSectionList(sectionList,resultSet);
         }
         employee.setSubjects(subjectList);
-        employee.setSectionsHandled(sectionList);
+        //employee.setSectionsHandled(sectionList);
         resultSet.previous();
         return employee;
     }
     private License generateLicense(ResultSet resultSet) throws Exception{
         License license = new License();
         license.setLicenseId(resultSet.getInt("licenseId"));
-        license.setLicenseNumber(resultSet.getInt("licenseNumber"));
-        license.setExpiryDate(resultSet.getDate("expirationDate"));
-        license.setIssueDate(resultSet.getDate("dateIssued"));
-        license.setEmployeeId(resultSet.getInt("employeeId"));
+//        license.setLicenseNumber(resultSet.getInt("licenseNumber"));
+//        license.setExpiryDate(resultSet.getDate("expirationDate"));
+//        license.setIssueDate(resultSet.getDate("dateIssued"));
         return license;
     }
 
@@ -182,7 +133,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Subject subject1 = new Subject();
         subject1.setSubjectCode(resultSet.getInt("subjectId"));
         subject1.setSubject(resultSet.getString("subjectName"));
-        subject1.setEmployeeId(resultSet.getInt("employeeId"));
         for(Subject subject2 : subjectList) {
             if(subject2.getSubject().equals(subject1.getSubject())) {
                 matched = true;

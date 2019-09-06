@@ -1,13 +1,16 @@
 package com.lourence.jonh.license.repository;
 
-import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class License {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int licenseId;
-    private int licenseNumber;
-    private Date issueDate;
-    private Date expiryDate;
-    private int employeeId;
+    private int licenseCode;
 
     public int getLicenseId() {
         return licenseId;
@@ -17,35 +20,11 @@ public class License {
         this.licenseId = licenseId;
     }
 
-    public void setLicenseNumber(int licenseNumber){
-        this.licenseNumber = licenseNumber;
+    public int getLicenseCode() {
+        return licenseCode;
     }
 
-    public int getLicenseNumber(){
-        return licenseNumber;
-    }
-
-    public void setIssueDate(Date issueDate){
-        this.issueDate = issueDate;
-    }
-
-    public Date getIssueDate(){
-        return issueDate;
-    }
-
-    public void setExpiryDate(Date expiryDate){
-        this.expiryDate = expiryDate;
-    }
-
-    public Date getExpiryDate(){
-        return expiryDate;
-    }
-
-    public void setEmployeeId(int employeeId){
-        this.employeeId = employeeId;
-    }
-
-    public int getEmployeeId(){
-        return employeeId;
+    public void setLicenseCode(int licenseCode) {
+        this.licenseCode = licenseCode;
     }
 }
