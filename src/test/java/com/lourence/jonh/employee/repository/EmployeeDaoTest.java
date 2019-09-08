@@ -110,8 +110,12 @@ class EmployeeDaoTest {
 
     @Test
     void getEmployeeTest() {
-        Employee employee = EmployeeDaoImpl.getInstance().getEmployeeById(3);
-        List<Subject> subjectList = employee.getSubjects();
+        Employee employee = EmployeeDaoImpl.getInstance().getEmployeeById(21);
+    }
+
+    @Test
+    void getEmployeeByName() {
+        Employee employee = EmployeeDaoImpl.getInstance().getEmployeeByName("Rodrigo Duterte");
     }
 
     @Test

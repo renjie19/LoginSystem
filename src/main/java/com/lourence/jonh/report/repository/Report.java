@@ -5,8 +5,9 @@ import java.util.Date;
 public class Report {
     private int id;
     private Date date;
-    private Date timeIn;
-    private Date timeOut;
+
+    private Long timeIn;
+    private Long timeOut;
     private double totalHours;
 
     public int getId(){
@@ -25,19 +26,19 @@ public class Report {
         this.date = date;
     }
 
-    public void setTimeIn(Date timeIn){
+    public void setTimeIn(Long timeIn){
         this.timeIn = timeIn;
     }
 
-    public Date getTimeIn(){
+    public Long getTimeIn(){
         return this.timeIn;
     }
 
-    public Date getTimeOut(){
+    public Long getTimeOut(){
         return this.timeOut;
     }
 
-    public void setTimeOut(Date timeOut){
+    public void setTimeOut(Long timeOut){
         this.timeOut = timeOut;
     }
 

@@ -4,9 +4,8 @@ import java.util.List;
 
 public interface SubjectDao {
     void assignSubject(Subject subject);
-    void deleteSubjectAssignment(String subjectName) throws Exception;
+    void deleteSubjectAssignment(int subjectId);
     void deleteAll() throws Exception;
-    void updateSubjectAssignment(Subject subject) throws Exception;
-    List<Subject> getSubjectsByEmployeeId(int employeeId) throws Exception;
+    void updateSubjectAssignment(Subject subject);
     List<Subject> getAllSubjects() throws Exception;
 }

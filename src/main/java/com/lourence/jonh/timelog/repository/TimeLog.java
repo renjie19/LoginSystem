@@ -1,46 +1,57 @@
 package com.lourence.jonh.timelog.repository;
 import com.lourence.jonh.util.StateEnum;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class TimeLog {
-    private int EmployeeId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int logId;
+    private int employeeId;
     private StateEnum type;
+    @Temporal(value = TemporalType.DATE)
     private Date date;
-    private Date time;
-    
-    public int getId(){
-        return EmployeeId;
+    private long time;
+
+    public int getLogId() {
+        return logId;
     }
 
-    public void setId(int id){
-        this.EmployeeId = id;
+    public void setLogId(int logId) {
+        this.logId = logId;
     }
-    
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
+    }
+
+    public StateEnum getType() {
+        return type;
+    }
+
     public void setType(StateEnum type) {
         this.type = type;
     }
-    
-    public StateEnum getType(){
-        return type;
-    }
-    
-    public void setDate(Date date){
-        this.date  = date;
+
+    public Date getDate() {
+        return date;
     }
 
-    public Date getDate(){
-        return this.date;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public void setTime(Date time){
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
         this.time = time;
     }
-
-    public Date getTime(){
-        return this.time;
-    }
-
-    
-    
 }

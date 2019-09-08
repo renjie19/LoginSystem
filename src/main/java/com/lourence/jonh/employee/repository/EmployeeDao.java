@@ -9,7 +9,7 @@ public interface EmployeeDao {
     int deleteEmployee(Employee emp)throws Exception;
     List<Employee> getAllEmployees();
     Employee getEmployeeById(int employeeID);
-    Employee getEmployeeByName(String name)throws Exception;
+    Employee getEmployeeByName(String name);
     void updateEmployee(Employee emp)throws Exception;
     void deleteAllEmployee();
     

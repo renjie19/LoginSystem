@@ -1,7 +1,7 @@
 package com.lourence.jonh.timelog.repository;
 
 public interface TimeLogDao {
-    int addLog(TimeLog log)throws Exception;
-    TimeLog getLastLogById(int id)throws Exception;
+    int addLog(TimeLog log);
+    TimeLog getLastLogById(int id);
     void deleteAllLogs();
 }

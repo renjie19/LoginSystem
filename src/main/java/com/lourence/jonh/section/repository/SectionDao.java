@@ -6,7 +6,7 @@ public interface SectionDao {
     Section addSection(Section section);
     void deleteSection(int sectionId) throws Exception;
     void updateSection(Section section) throws Exception;
-    void deleteAll() throws Exception;
+    void deleteAll();
     Section getSectionById(int sectionId);
-    List<Section> getAllSections() throws Exception;
+    List<Section> getAllSections();
 }

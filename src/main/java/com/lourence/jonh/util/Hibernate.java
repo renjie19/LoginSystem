@@ -55,6 +55,17 @@ public class Hibernate {
         return ENTITYMANAGER.createQuery(queryString).getResultList();
     }
 
+    public Object getObjectNamedQuery(String queryString) {
+        try {
+           return ENTITYMANAGER.createQuery(queryString).getSingleResult();
+        }catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return null;
+    }
+
     public void createNativeQuery(String query) {
         ENTITYMANAGER.getTransaction().begin();
         ENTITYMANAGER.createNativeQuery(query).executeUpdate();

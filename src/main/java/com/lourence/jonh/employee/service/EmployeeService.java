@@ -80,17 +80,16 @@ public class EmployeeService {
     }
 
     public boolean hasId(int id)throws Exception{
-        if(employeeDao.getEmployeeById(id).getEmployeeId() == id){
-            return true;
-        }else{
-            throw new Exception("Id Does Not Exist");
+        if(employeeDao.getEmployeeById(id)!=null){
+           return true;
         }
+        throw new Exception("Id does not Exist");
     }
 
     private void hasEmployeeName(String employeeName) throws Exception {
         Employee employee = employeeDao.getEmployeeByName(employeeName);
-        if ((employee.getName() != null) && (employee.getName().equals(employeeName))) {
-            throw new Exception("Employee Already Exist");
+        if(employee != null) {
+            throw new Exception("Employee Already Exists");
         }
     }
 

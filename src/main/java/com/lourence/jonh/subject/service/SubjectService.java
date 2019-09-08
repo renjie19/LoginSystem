@@ -43,10 +43,7 @@ public class SubjectService {
 
     public void getSubjectsByEmployee(int employeeId) {
         try {
-            List<Subject> subjectList = repository.getSubjectsByEmployeeId(employeeId);
-            for(Subject subject : subjectList) {
-                System.out.println(" > "+subject.getSubjectCode()+ " | "+ subject.getSubject());
-            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
