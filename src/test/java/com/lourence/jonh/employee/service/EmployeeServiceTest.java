@@ -39,10 +39,7 @@ class EmployeeServiceTest {
         employee.setAddress("Manila");
         employee.setPosition("Cha-Cha Queen");
         Employee employee1 = EmployeeService.getInstance().addEmployee(employee);
-        int numberOfEmployees = EmployeeService.getInstance().viewEmployees();
         EmployeeService.getInstance().deleteEmployee(employee1);
-        int numberafterDelete = EmployeeService.getInstance().viewEmployees();
-        assertEquals(numberOfEmployees-1,numberafterDelete);
     }
 
     @Test

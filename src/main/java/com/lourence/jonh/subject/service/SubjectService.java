@@ -7,56 +7,32 @@ import com.lourence.jonh.subject.repository.SubjectDaoImpl;
 import java.util.List;
 
 public class SubjectService {
-    private static SubjectService service;
-    private SubjectDao repository;
+    private static SubjectService subjectService;
+    private SubjectDao subjectDao;
 
-    private SubjectService() {
-        this.repository = SubjectDaoImpl.getInstance();
+    public SubjectService() {
+        this.subjectDao = SubjectDaoImpl.getInstance();
     }
 
-    public static SubjectService getInstance() {
-        if(service==null) {
-            service = new SubjectService();
-        }
-        return service;
-    }
-
-    public void assignSubject(String subjectName,int employeeId) {
-
+    public void assignSubject(int subjectCode,String subjectName) {
+        Subject subject = new Subject();
+        subject.setSubject(subjectName);
+        subject.setSubjectCode(subjectCode);
+        subjectDao.assignSubject(subject);
     }
 
     public void deleteAll() {
-        try{
-            repository.deleteAll();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+        subjectDao.deleteAll();
     }
 
     public void updateSubject(Subject subject) {
-        try {
-            repository.updateSubjectAssignment(subject);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void getSubjectsByEmployee(int employeeId) {
-        try {
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        subjectDao.updateSubjectAssignment(subject);
     }
 
     public void getAllSubjects() {
-        try {
-            List<Subject> subjectList = repository.getAllSubjects();
-            for(Subject subject : subjectList) {
-                System.out.println(subject.getSubjectCode() + " | " + subject.getSubject());
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
+        List<Subject> subjectList = subjectDao.getAllSubjects();
+        for(Subject subject : subjectList) {
+            System.out.println(subject.getSubjectCode() + " | " + subject.getSubject());
         }
     }
 

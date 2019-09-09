@@ -27,7 +27,7 @@ public class TimeLogDaoImpl implements TimeLogDao {
 
     @Override
     public TimeLog getLastLogById(int id) {
-        String insertSql = "SELECT t from TimeLog t where employeeId = "+id+" order by t DESC";
+        String insertSql = "SELECT t from TimeLog t where employeeId = "+id+" order by t DESC";//issue cant get only one data
         Hibernate hibernate = new Hibernate();
         List<TimeLog> timeLogList = hibernate.createNamedQuery(insertSql);
         if(!timeLogList.isEmpty()) {

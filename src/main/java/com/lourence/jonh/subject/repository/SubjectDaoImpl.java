@@ -43,7 +43,7 @@ public class SubjectDaoImpl implements SubjectDao {
     }
 
     @Override
-    public List<Subject> getAllSubjects() throws Exception {
+    public List<Subject> getAllSubjects() {
         String insertSql = "Select s from Subject s";
         Hibernate hibernate = new Hibernate();
         return hibernate.createNamedQuery(insertSql);

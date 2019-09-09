@@ -3,6 +3,7 @@ package com.lourence.jonh.employee.service;
 import com.lourence.jonh.employee.repository.Employee;
 import com.lourence.jonh.employee.repository.EmployeeDao;
 import com.lourence.jonh.employee.repository.EmployeeDaoImpl;
+import com.lourence.jonh.util.Hibernate;
 
 import java.util.List;
 
@@ -35,48 +36,24 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Employee employee){
-        try {
-            if (employee.getEmployeeId() != 0) {
-                employeeDao.deleteEmployee(employee);
-            } else {
-                System.out.println("No Match");
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+        employeeDao.deleteEmployee(employee);
     }
 
     public void updateEmployee(Employee employee){
-        try {
-            employeeDao.updateEmployee(employee);
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
+        employeeDao.updateEmployee(employee);
     }
 
-    public int viewEmployees(){
-        try {
-            List<Employee> employeeList = employeeDao.getAllEmployees();
-            for(Employee employee: employeeList){
-                System.out.println("[ "+employee.getName()+" | "+employee.getAge()+" | "+employee.getAddress()+"" +
-                        " | "+employee.getPosition()+" ]");
-            }
-            return employeeList.size();
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+    public void viewEmployees(){
+        List<Employee> employeeList = employeeDao.getAllEmployees();
+        for(Employee employee: employeeList){
+            System.out.println("[ "+employee.getName()+" | "+employee.getAge()+" | "+employee.getAddress()+"" +
+                    " | "+employee.getPosition()+" ]");
         }
-        return 0;
     }
 
     public Employee getEmployeeById(int employeeId){
-        try {
-            if (hasId(employeeId)) {
-                return employeeDao.getEmployeeById(employeeId);
-            }
-        }catch(Exception e){
-            System.out.println(e.getMessage());
-        }
-        return new Employee();
+        Hibernate hibernate = new Hibernate();
+        return (Employee)hibernate.find(Employee.class,employeeId);
     }
 
     public boolean hasId(int id)throws Exception{

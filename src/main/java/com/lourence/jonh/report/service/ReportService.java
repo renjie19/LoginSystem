@@ -9,16 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ReportService {
-    private static ReportService reportService;
-    private ReportDao reportDao = ReportDaoImpl.getInstance();
+    private ReportDao reportDao;
 
-    private ReportService(){}
-
-    public static ReportService getInstance() {
-        if(reportService ==null){
-            reportService = new ReportService();
-        }
-        return reportService;
+    public ReportService(){
+        this.reportDao = ReportDaoImpl.getInstance();
     }
 
     public void viewEmployeeReportPerDate(int employeeId, String startDate, String endDate){
@@ -48,11 +42,6 @@ public class ReportService {
           Long timeOut = report.getTimeOut();
           Long diff = timeOut - timeIn;
           return ((double)diff/1000)/3600;
-//            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-//            Date start = format.parse(report.getTimeIn().toString());
-//            Date end = format.parse(report.getTimeOut().toString());
-//            long diff = end.getTime() - start.getTime();
-//            return ((double)diff/1000)/3600;
         }
         return 0;
     }
@@ -62,6 +51,6 @@ public class ReportService {
         if(date != null) {
             return dateFormat.format(date);
         }
-        return null;
+        return "    ";
     }
 }

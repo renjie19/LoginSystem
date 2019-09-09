@@ -1,14 +1,11 @@
 package com.lourence.jonh.employee.repository;
 
 import com.lourence.jonh.util.Hibernate;
-import com.lourence.jonh.util.MySqlConnector;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
     private static EmployeeDaoImpl employeeDao;
-    private List<Employee> employeeList;
 
     private EmployeeDaoImpl() {
     }
@@ -22,22 +19,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee addEmployee(Employee employee){
-        try{
-            Hibernate hibernate = new Hibernate();
-            hibernate.persist(employee);
-            return getEmployeeByName(employee.getName());
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        Hibernate hibernate = new Hibernate();
+        hibernate.persist(employee);
+        return employee;
     }
 
     @Override
-    public int deleteEmployee(Employee employee)throws Exception{
-        String insertSql = "DELETE FROM employee WHERE id = ?";
-        PreparedStatement preparedStatement = MySqlConnector.getInstance().prepareStatement(insertSql);
-        preparedStatement.setInt(1,employee.getEmployeeId());
-        return MySqlConnector.getInstance().executeUpdate(preparedStatement);
+    public void deleteEmployee(Employee employee) {
+        Hibernate hibernate = new Hibernate();
+        hibernate.remove(Employee.class,employee.getEmployeeId());
     }
 
     @Override
@@ -61,7 +51,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public void updateEmployee(Employee employee) throws Exception{
+    public void updateEmployee(Employee employee) {
         Hibernate hibernate = new Hibernate();
         hibernate.merge(employee);
     }
@@ -71,12 +61,5 @@ public class EmployeeDaoImpl implements EmployeeDao {
         String insertSql = "DELETE FROM employee";
         Hibernate hibernate = new Hibernate();
         hibernate.createNativeQuery(insertSql);
-    }
-
-    public boolean employeeNameExists(String employeeName) throws Exception{
-        if(getEmployeeByName(employeeName)==null) {
-            throw new Exception("Employee name does not exist");
-        }
-        return true;
     }
 }

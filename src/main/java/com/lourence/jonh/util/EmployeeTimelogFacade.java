@@ -9,7 +9,8 @@ public class EmployeeTimelogFacade {
     public TimeLog log(int employeeId){
         try {
             EmployeeService.getInstance().hasId(employeeId);
-            return TimeLogService.getInstance().log(employeeId);
+            TimeLogService timeLogService = new TimeLogService();
+            return timeLogService.log(employeeId);
         }catch(Exception e){
             System.out.println(e.getMessage());;
         }

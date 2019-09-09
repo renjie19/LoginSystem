@@ -21,19 +21,20 @@ public class SectionDaoImpl implements SectionDao {
     public Section addSection(Section section) {
         Hibernate hibernate = new Hibernate();
         hibernate.persist(section);
-        return null;
+        return section;
     }
 
     @Override
-    public void deleteSection(int sectionId) throws Exception {
+    public void deleteSection(int sectionId) {
         Hibernate hibernate = new Hibernate();
         hibernate.remove(Section.class,sectionId);
     }
 
     @Override
-    public void updateSection(Section section) throws Exception {
+    public Section updateSection(Section section) {
         Hibernate hibernate = new Hibernate();
         hibernate.merge(section);
+        return section;
     }
 
     @Override
@@ -54,6 +55,5 @@ public class SectionDaoImpl implements SectionDao {
         String insertSql = "Select s from Section s";
         Hibernate hibernate = new Hibernate();
         return hibernate.createNamedQuery(insertSql);
-
     }
 }

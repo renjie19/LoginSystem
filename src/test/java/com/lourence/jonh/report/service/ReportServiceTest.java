@@ -13,6 +13,7 @@ class ReportServiceTest {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String startDate = dateFormat.format(new Date());
         String endDate = dateFormat.format(new Date());
-        ReportService.getInstance().viewEmployeeReportPerDate(7,"2019-09-07","2019-09-07");
+        ReportService reportService = new ReportService();
+        reportService.viewEmployeeReportPerDate(7,"2019-09-07","2019-09-07");
     }
 }
